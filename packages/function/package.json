@@ -1,5 +1,5 @@
 {
-  "name": "@arkansasio/agent-lumos-aris-console-function",
+  "name": "@arkansasio/agent-lumos-aris-function",
   "version": "0.1.1",
   "$schema": "https://json.schemastore.org/package.json",
   "private": true,
