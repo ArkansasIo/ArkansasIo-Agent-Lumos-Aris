@@ -52,7 +52,7 @@ export const languages: LanguageDefinition[] = [
   ["Dockerfile","infrastructure",["Dockerfile"],"Docker"], ["Terraform","infrastructure",[".tf"],"Terraform"],
   ["HCL","infrastructure",[".hcl"],"HashiCorp"], ["YAML","configuration",[".yaml",".yml"],"Config"],
   ["JSON","configuration",[".json"],"Config"], ["TOML","configuration",[".toml"],"Config"], ["XML","configuration",[".xml"],"Config"],
-].map(([name, category, extensions, runtime]) => ({
+] as const).map(([name, category, extensions, runtime]) => ({
   id: name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
   name, category, description: `${name} language integration with editor, parser/tooling registry and agent skills.`,
   tags: [category, "lsp", "formatting"], extensions, runtime
@@ -71,7 +71,7 @@ export const libraries: LibraryDefinition[] = [
   ["PostgreSQL","database","SQL","SQL","postgresql"], ["MySQL","database","SQL","SQL","mysql2"],
   ["SQLite","database","SQL","SQL","better-sqlite3"], ["MongoDB","database","NoSQL","JavaScript/TypeScript","mongodb"],
   ["Redis","database","cache","Multiple","redis"], ["Neo4j","database","graph","Cypher","neo4j-driver"],
-].map(([name, category, ecosystem, language, packageName]) => ({
+] as const).map(([name, category, ecosystem, language, packageName]) => ({
   id: name.toLowerCase().replace(/[^a-z0-9]+/g, "-"), name, category,
   description: `${name} integration for project architecture, dependency analysis and AI code generation.`,
   tags: [category, ecosystem, "library"], ecosystem, languages: language.split("/"), packageName
@@ -92,7 +92,7 @@ export const tools: ToolDefinition[] = [
   ["Kubernetes","infrastructure",["manifest","deploy","scale","logs","rollout"]],
   ["Security Scanner","security",["SAST","dependency audit","secrets","SBOM"]],
   ["Documentation Generator","documentation",["README","API","architecture","ADR","changelog"]],
-].map(([name, category, capabilities]) => ({
+] as const).map(([name, category, capabilities]) => ({
   id: name.toLowerCase().replace(/[^a-z0-9]+/g, "-"), name, category,
   description: `${name} adapter exposed to Lumos Aris agents through the universal tool registry.`,
   tags: [category, "agent-tool"], capabilities
@@ -105,7 +105,7 @@ export const uml: UmlDefinition[] = [
   ["Communication Diagram","behavioral","UML"], ["Timing Diagram","behavioral","UML"], ["System Context","architecture","C4"],
   ["Container Diagram","architecture","C4"], ["C4 Component Diagram","architecture","C4"], ["Code Diagram","architecture","C4"],
   ["Flowchart","diagram","Mermaid"], ["Entity Relationship","data","Mermaid"], ["Dependency Graph","graph","Graphviz"],
-].map(([name, category, notation]) => ({
+] as const).map(([name, category, notation]) => ({
   id: name.toLowerCase().replace(/[^a-z0-9]+/g, "-"), name, category,
   description: `${name} editor, renderer and AI generation target.`, tags: ["diagram", category], notation
 }))
