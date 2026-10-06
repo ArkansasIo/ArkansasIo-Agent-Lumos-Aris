@@ -1,292 +1,465 @@
 <h1 align="center">ArkansasIo Agent Lumos Aris</h1>
 
-<p align="center">
-  <img src="assets/readme/lumos-aris-banner.png" alt="ArkansasIo Agent Lumos Aris" width="700">
-</p>
-
-<p align="center"><strong>ArkansasIo Agent Lumos Aris: Where Models and Agents Co-Evolve</strong></p>
+<p align="center"><strong>Terminal-native AI development agent for autonomous software engineering</strong></p>
+<p align="center">Build • Plan • Compose • Remember • Verify • Automate</p>
 
 <p align="center">
-  <a href="README.zh.md">中文</a> | English
-</p>
-
-<p align="center">
-  <a href="https://lumos-aris.xiaomi.com/coder">Website</a> | <a href="https://lumos-aris.xiaomi.com/en/blog/lumos-aris-code-long-horizon">Blog</a>
+  <a href="https://github.com/ArkansasIo/MiMo-Code">GitHub</a> |
+  <a href="https://github.com/ArkansasIo/MiMo-Code/issues">Issues</a> |
+  <a href="https://github.com/ArkansasIo/MiMo-Code/blob/main/LICENSE">License</a>
 </p>
 
 ---
 
-ArkansasIo Agent Lumos Aris is a terminal-native AI coding assistant. It can read and write code, run commands, manage Git, coordinate subagents, and maintain persistent project memory so development context survives across sessions.
+## Overview
 
-Lumos Aris Auto is built in as a free-for-limited-time channel, so you can start with zero configuration. ArkansasIo Agent Lumos Aris also supports connecting to any mainstream LLM provider API.
+**ArkansasIo Agent Lumos Aris** is an AI-powered terminal development environment built for serious software engineering workflows.
+
+Lumos Aris can inspect and modify source code, execute development commands, work with Git repositories, coordinate subagents, maintain persistent project memory, and drive structured development workflows from planning through verification.
+
+The project supports **local AI inference** and compatible remote model providers. Local inference can run through Ollama, allowing developers to use the agent without requiring a paid cloud API.
+
+### Design goals
+
+- **Developer-first** — operate directly inside real software projects.
+- **Agentic** — execute multi-step development tasks instead of only generating text.
+- **Persistent** — retain useful project knowledge across sessions.
+- **Composable** — combine agents, skills, commands, MCP servers, and tools.
+- **Local-first** — support local models and privacy-conscious workflows.
+- **Verifiable** — encourage testing, type checking, review, and validation.
+- **Extensible** — support plugins, custom providers, automation, and integrations.
 
 ---
 
 ## Quick Start
 
-```bash
-# One-line install
-curl -fsSL https://lumos-aris.xiaomi.com/install | bash
+### Requirements
 
-# Or install via npm
-npm install -g @lumos-aris-ai/cli
+Recommended:
 
-# Run
-lumos-aris
-```
+- Windows 10/11, macOS, or Linux
+- Bun
+- Ollama for local inference
+- Git
+- A supported AI model
 
-The first launch guides you through configuration automatically. Supported options:
-- **Lumos Aris Auto (free for a limited time)** — anonymous channel, zero configuration
-- **Lumos Aris Platform** — OAuth login
-- **Import from Claude Code** — migrate existing authentication in one step
-- **Custom Provider** — add any OpenAI-compatible API in the TUI
+### Install dependencies
 
-<details>
-<summary><strong>WSL: clipboard issues</strong></summary>
+~~~bash
+git clone https://github.com/ArkansasIo/MiMo-Code.git
+cd MiMo-Code
+bun install
+~~~
 
-If you encounter garbled text when copying on WSL, install `xsel`:
-```bash
-sudo apt install xsel
-```
-</details>
+### Run Lumos Aris
+
+~~~bash
+bun run dev
+~~~
+
+The application can also be started through the platform-specific launcher and setup scripts in the scripts/ directory.
+
+### Windows automatic setup
+
+From PowerShell:
+
+~~~powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\scripts\auto_setup_lumos_aris.ps1
+~~~
+
+From Command Prompt:
+
+~~~bat
+scripts\auto_setup_lumos_aris.bat
+~~~
+
+For manual local-model setup:
+
+~~~powershell
+.\scripts\setup_free_lumos_aris_llm.ps1
+~~~
+
+Then start the agent:
+
+~~~powershell
+.\scripts\start_free_lumos_aris.ps1
+~~~
 
 ---
 
-## Core Features
+## Local AI — Ollama
 
-### Multiple Agents
+Lumos Aris supports local inference through Ollama.
 
-| Agent | Description |
-|--------|------|
-| **build** | Default. Full tool permissions for development |
-| **plan** | Read-only analysis mode for code exploration and solution design |
-| **compose** | Orchestration mode for specs-driven development and skill-driven workflows |
+A typical local endpoint is:
 
-Press `Tab` to switch between primary agents. Subagents are created by the system as needed.
+~~~text
+http://127.0.0.1:11434/v1
+~~~
 
-### Persistent Memory
+Example model:
 
-Cross-session memory powered by SQLite FTS5 full-text search:
+~~~bash
+ollama pull qwen2.5-coder:7b
+~~~
 
-- **Project memory** (`MEMORY.md`) — persistent project knowledge, rules, and architecture decisions
-- **Session checkpoint** (`checkpoint.md`) — structured state snapshots maintained automatically by the checkpoint-writer subagent
-- **Scratch notes** (`notes.md`) — temporary note area for agents
-- **Task progress** (`tasks/<id>/progress.md`) — per-task logs
+Choose a model size appropriate for available CPU, GPU, RAM, and VRAM.
 
-Memory is injected automatically when a session resumes, so the agent does not need to relearn project context.
+See the Ollama model library for available models.
 
-### Intelligent Context Management
+> **No paid-token requirement:** local inference does not require a paid cloud API key. Models still have normal context and output-token limits because those are properties of the model.
 
-- **Automatic checkpoints** — decides when to save session state based on the model context window
-- **Context reconstruction** — when context approaches the limit, rebuilds it from the latest checkpoint, project memory, task progress, and retained recent messages so the agent can continue the current task
-- **Budgeted injection** — uses a token budget to control how much checkpoint, memory, and notes content enters context, with importance ranking
+### Privacy
 
-### Task Tracking
+When configured for local inference, model requests are sent to the local Ollama service on 127.0.0.1.
 
-A tree-shaped task system (`T1`, `T1.1`, `T1.2`, …) that integrates automatically with the checkpoint system, so task progress is preserved when sessions resume.
+Lumos Aris can also support optional network features such as MCP servers, web tools, remote providers, and integrations. Disable those features when a fully isolated/offline workflow is required.
 
-### Subagent System
+---
 
-The primary agent can create subagents on demand. Subagents share the current session context and can work in parallel, with lifecycle tracking, cancellation, and background execution.
+# Core Features
 
-### Goal / Stop Condition
+## Multi-Agent Development
 
-The `/goal` command sets a stopping condition for a session. When the agent tries to stop, an independent judge model evaluates the conversation to decide whether the condition is truly satisfied — preventing premature "optimistic stops" during autonomous work.
+Lumos Aris provides multiple primary operating modes:
 
-### Compose Mode
+| Agent | Purpose |
+|---|---|
+| **build** | Full development workflow with tools for implementing changes |
+| **plan** | Read-oriented analysis, architecture, investigation, and planning |
+| **compose** | Structured orchestration for specification-driven development |
 
-Compose mode provides a structured workflow for specs-driven development. It includes built-in skills for planning, execution, code review, TDD, debugging, verification, and merging — orchestrating the full lifecycle from spec to shipped code.
+Press Tab where supported to switch between primary agents.
 
-### Voice Input
+Subagents can be created by the primary agent when additional analysis, implementation, testing, or review work is useful.
 
-Real-time streaming voice input powered by TenVAD and Lumos Aris ASR. Activate with `/voice`, then speak — audio is segmented by pauses and transcribed incrementally into the input. Available for Lumos Aris platform users. Requires `sox` (`brew install sox` on macOS, other platforms similar).
+---
 
-<details>
-<summary><strong>WSLg audio setup</strong></summary>
+## Persistent Project Memory
 
-```bash
+Lumos Aris maintains project context across development sessions.
+
+The memory architecture can include:
+
+- **Project memory** — durable architecture decisions, project rules, and important knowledge.
+- **Session checkpoints** — structured snapshots of active work.
+- **Scratch notes** — temporary working information.
+- **Task progress** — per-task execution state and progress records.
+
+This allows long-running engineering tasks to resume without rebuilding the entire project context from scratch.
+
+---
+
+## Intelligent Context Management
+
+Long-running AI sessions can exceed model context limits. Lumos Aris provides mechanisms for managing that state.
+
+Capabilities include:
+
+- Automatic checkpoint creation
+- Context reconstruction
+- Project-memory retrieval
+- Task-progress restoration
+- Budgeted context injection
+- Importance-based memory selection
+- Session continuity
+
+---
+
+## Task Tracking
+
+Development tasks can be represented as hierarchical work trees:
+
+~~~text
+T1
+├── T1.1
+├── T1.2
+│   ├── T1.2.1
+│   └── T1.2.2
+└── T1.3
+~~~
+
+Task state can be connected with checkpoints and persistent project memory so complex implementation work remains traceable.
+
+---
+
+## Subagent Orchestration
+
+The primary agent can delegate work to specialized subagents.
+
+Typical responsibilities include:
+
+- Repository investigation
+- Architecture analysis
+- Implementation
+- Testing
+- Debugging
+- Code review
+- Documentation
+- Verification
+- Research
+- Release preparation
+
+---
+
+## Goal and Stop Conditions
+
+The /goal command can define an explicit completion condition for an autonomous session.
+
+This is useful for long-running tasks such as:
+
+- Fixing a build
+- Completing a feature
+- Migrating a codebase
+- Repairing tests
+- Performing repository cleanup
+- Preparing a release
+
+---
+
+## Compose Mode
+
+Compose Mode provides a structured software-engineering workflow:
+
+~~~text
+Specification
+     ↓
+Planning
+     ↓
+Implementation
+     ↓
+Testing
+     ↓
+Code Review
+     ↓
+Verification
+     ↓
+Merge / Release
+~~~
+
+Compose workflows can combine skills, agents, commands, testing, debugging, and verification into repeatable development processes.
+
+---
+
+## Dream & Distill
+
+### /dream
+
+Analyzes recent development activity and extracts useful long-term knowledge into project memory.
+
+Examples include architecture decisions, important conventions, repeated project rules, lessons learned, and stable implementation patterns.
+
+### /distill
+
+Identifies repeated development workflows and can turn high-confidence patterns into reusable skills, subagents, commands, and development procedures.
+
+---
+
+## Voice Input
+
+Lumos Aris can support streaming voice-driven development workflows where the configured voice/ASR provider is available.
+
+Voice input can be useful for describing implementation tasks, navigating development workflows, giving high-level commands, and capturing ideas without typing.
+
+Audio tooling may require platform-specific dependencies such as sox.
+
+### WSLg example
+
+~~~bash
 sudo apt install -y sox pulseaudio libasound2-plugins
 export PULSE_SERVER=unix:/mnt/wslg/PulseServer
-```
-</details>
-
-<details>
-<summary><strong>SSH remote audio (Mac → remote host)</strong></summary>
-
-```bash
-# Mac (local)
-brew install pulseaudio
-pulseaudio --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1" --exit-idle-time=-1 --daemonize
-# Add to ~/.ssh/config: RemoteForward 4713 127.0.0.1:4713
-
-# Remote host
-apt install -y pulseaudio pulseaudio-utils sox
-export PULSE_SERVER=tcp:127.0.0.1:4713
-# Verify: pactl info
-```
-</details>
-
-<details>
-<summary><strong>Non-Lumos Aris voice providers (OpenRouter, internal API, etc.)</strong></summary>
-
-Voice input can route through other OpenAI-compatible providers via the `voice` config field. The ASR model (`lumos-aris-v2.5-asr`) is only available on the original provider platform; voice control mode (`lumos-aris-v2.5`) is available on OpenRouter and compatible relay platforms.
-
-**OpenRouter (voice control only):**
-
-Use `/connect` to sign in to OpenRouter, then add to your config:
-```jsonc
-{
-  "voice": {
-    "control_model": "openrouter/xiaomi/lumos-aris-v2.5"
-  }
-}
-```
-
-**Internal / self-hosted relay (both ASR and voice control):**
-```jsonc
-{
-  "provider": {
-    "internal": {
-      "options": {
-        "baseURL": "https://your-api-gateway.example.com/v1",
-        "apiKey": "sk-..."
-      },
-      "models": {
-        "xiaomi/lumos-aris-v2.5-asr": { "name": "Lumos Aris-V2.5-ASR" },
-        "xiaomi/lumos-aris-v2.5": { "name": "Lumos Aris-V2.5" }
-      }
-    }
-  },
-  "voice": {
-    "asr_model": "internal/xiaomi/lumos-aris-v2.5-asr",
-    "control_model": "internal/xiaomi/lumos-aris-v2.5"
-  }
-}
-```
-
-Custom providers must register at least one model in their `models` field to be recognized. The model names in `voice.*_model` are sent directly to the API — they don't need to match the registered model keys exactly.
-
-> **Note:** Models registered under a custom provider will appear in the model selection list. Don't use ASR-only models (e.g. `lumos-aris-v2.5-asr`) as your primary coding model.
-
-</details>
-
-### Dream & Distill
-
-- **`/dream`** — scans recent session traces, extracts persistent knowledge into project memory, and removes outdated entries
-- **`/distill`** — discovers repeated manual workflows in recent work and packages high-confidence candidates into reusable skills, subagents, or commands
+~~~
 
 ---
 
-## Configuration
+# Provider Support
 
-ArkansasIo Agent Lumos Aris is configured via ` .lumos-aris/lumos-aris.json` in the project directory (or `~/.config/lumos-aris/lumos-aris.json` globally). Key options include:
+Lumos Aris is designed to work with compatible AI model providers.
 
-- Provider and model selection
-- Agent permissions and custom agents
-- Checkpoint and memory behavior
-- MCP server connections
-- Keybindings and theme
+Supported configurations can include:
 
-Max Mode (parallel best-of-N reasoning with judge selection) can be enabled via `experimental.maxMode` in the config.
+- Local Ollama models
+- OpenAI-compatible APIs
+- Self-hosted model gateways
+- MCP-connected services
+- Other providers supported by the project configuration
 
----
-
-## Development
-
-```bash
-bun install              # Install dependencies
-bun run dev              # Run in development mode
-bun turbo typecheck      # Type check
-```
+External model names and provider identifiers should remain unchanged when they are required for API compatibility.
 
 ---
 
-## Relationship to OpenCode
+# Configuration
 
-ArkansasIo Agent Lumos Aris is built as a fork of [OpenCode](https://github.com/ArkansasIoLumos Aris/Lumos Aris-Code). It keeps all core OpenCode capabilities (multiple providers, TUI, LSP, MCP, plugins) and adds persistent memory, intelligent context management, subagent orchestration, goal-driven autonomous loops, compose workflows, and self-improvement via dream/distill.
+The Lumos Aris configuration convention is:
+
+~~~text
+.lumos-aris/
+~~~
+
+and:
+
+~~~text
+~/.config/lumos-aris/
+~~~
+
+Configuration can control:
+
+- Providers
+- Models
+- Agents
+- Permissions
+- Checkpoints
+- Memory
+- MCP servers
+- Commands
+- Keybindings
+- Themes
+- Experimental features
+
+Existing installations containing legacy configuration directories should be migrated carefully rather than deleted automatically.
 
 ---
 
-## Community
+# Development
 
-Scan the QR code to join the community group chat:
+~~~bash
+bun install
+bun run dev
+bun run typecheck
+~~~
 
-<p align="center">
-  <img src="assets/readme/community-qrcode.jpg" alt="Community group chat QR code" width="240">
-</p>
+Run package-specific tests from the appropriate workspace/package directory.
+
+The repository is a Bun workspace containing the core application, SDK, UI, plugins, scripts, console, desktop application, and supporting packages.
 
 ---
 
-## License
+# Repository Architecture
+
+~~~text
+packages/
+├── app/          # Web application
+├── console/      # Console services and application
+├── desktop/      # Desktop application
+├── enterprise/   # Enterprise functionality
+├── opencode/     # Core terminal agent
+├── plugin/       # Plugin system
+├── script/       # Development and release scripts
+├── sdk/          # SDK packages
+├── shared/       # Shared utilities
+├── slack/        # Slack integration
+├── storybook/    # Component development
+└── ui/           # Shared UI components
+~~~
+
+The primary command-line product is **Lumos Aris**.
+
+CLI command:
+
+~~~bash
+lumos-aris
+~~~
+
+---
+
+# Security and Responsible Use
+
+Lumos Aris is an autonomous development tool capable of reading files, modifying code, executing commands, and interacting with external services.
+
+Recommended practices:
+
+- Review generated changes before production deployment.
+- Keep credentials in environment variables or secure secret stores.
+- Avoid unnecessary filesystem permissions.
+- Review MCP servers before connecting them.
+- Use isolated development environments for untrusted repositories.
+- Run security scanners and tests before releasing software.
+- Keep dependencies updated.
+- Do not expose local development services publicly without authentication.
+
+---
+
+# Windows Tools
+
+The repository includes Windows-oriented setup, repair, and launcher scripts.
+
+Documentation:
+
+- [Windows Setup](./docs/WINDOWS_SETUP.md)
+- [Project Setup](./docs/PROJECT_SETUP.md)
+- [Automatic Setup](./AUTO_SETUP.md)
+
+The scripts/ directory contains setup, repair, local-model, and launch automation.
+
+---
+
+# Relationship to OpenCode
+
+ArkansasIo Agent Lumos Aris is based on the OpenCode development-agent architecture and extends that foundation with:
+
+- Persistent memory
+- Context reconstruction
+- Task tracking
+- Subagent orchestration
+- Goal-driven workflows
+- Compose workflows
+- Local inference
+- Development automation
+- Dream/Distill workflows
+- ArkansasIo-specific tooling and packaging
+
+Lumos Aris is intended to be a distinct ArkansasIo product identity while retaining compatible upstream concepts and open-source development practices.
+
+---
+
+# Project Identity
+
+**Product:** ArkansasIo Agent Lumos Aris
+
+**Short name:** Lumos Aris
+
+**CLI:** lumos-aris
+
+**Organization:** ArkansasIo
+
+**Current repository:** ArkansasIo/MiMo-Code
+
+**License:** MIT
+
+The GitHub repository currently retains its historical repository path for compatibility while the application is being migrated to the ArkansasIo Agent Lumos Aris identity.
+
+---
+
+# Community and Contributions
+
+Issues, feature requests, documentation improvements, bug reports, and pull requests are welcome.
+
+When submitting an issue, include:
+
+1. Operating system
+2. Bun version
+3. Node.js version if relevant
+4. Model/provider configuration
+5. Reproduction steps
+6. Error output
+7. Relevant logs
+8. Expected behavior
+9. Actual behavior
+
+For security-sensitive issues, do not publish credentials, API keys, tokens, private source code, or other sensitive information in public issues.
+
+---
+
+# License
 
 Source code is licensed under the [MIT License](./LICENSE).
 
-Use of ArkansasIo Agent Lumos Aris is also subject to the [Use Restrictions](./USE_RESTRICTIONS.md).
-Use of ArkansasIo Lumos Aris-hosted services is subject to the [Lumos Aris Terms of Service](https://platform.xiaomilumos-aris.com/docs/terms/user-agreement).
-Use of the ArkansasIo Agent Lumos Aris name, logo, and trademarks is subject to the Lumos Aris Trademark Policy.
+See [USE_RESTRICTIONS.md](./USE_RESTRICTIONS.md) for project-specific use restrictions.
 
 ---
 
-## Free local inference — no paid API tokens
-
-ArkansasIo Agent Lumos Aris now defaults to **local Ollama inference**. This means you do not need a paid API key, subscription, or cloud inference account to use the coding agent. The model runs on your own computer.
-
-The default model is **Qwen2.5-Coder 7B**. Ollama currently provides Qwen2.5-Coder in 0.5B, 1.5B, 3B, 7B, 14B, and 32B sizes, so smaller computers can use a smaller model. See https://ollama.com/library/qwen2.5-coder for the available model sizes.
-
-### Windows setup
-
-~~~powershell
-.\\scripts\\setup_free_lumos_aris_llm.ps1
-# or
-.\\scripts\\setup_free_llm.bat
-
-.\\scripts\\start_free_lumos-aris.ps1
-~~~
-
-Choose a smaller or larger model when needed:
-
-~~~powershell
-.\\scripts\\setup_free_lumos_aris_llm.ps1 -Size 3b
-.\\scripts\\setup_free_lumos_aris_llm.ps1 -Size 7b
-.\\scripts\\setup_free_lumos_aris_llm.ps1 -Size 14b
-~~~
-
-The local OpenAI-compatible endpoint is http://127.0.0.1:11434/v1. Ollama provides a local API for running models directly on the machine. See https://ollama.com/library/qwen2.5-coder for the model and API examples.
-
-> **What “no tokens” means:** there is no paid API-token billing and no provider API key is required for inference. LLMs still internally use tokens and have a finite context/output limit; those are properties of the model, not a cloud billing requirement.
-
-### Offline/privacy behavior
-
-The inference request is sent to the local Ollama server on 127.0.0.1. ArkansasIo Agent Lumos Aris still retains its normal optional web/MCP capabilities, so those should be disabled separately if you want a completely offline installation.
-
-
-## Windows automatic setup
-
-For Windows users, the repository includes a complete setup and repair path. From the repository root:
-
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\\scripts\\auto_setup_lumos-aris.ps1
-```
-
-Or from Command Prompt:
-
-```bat
-scripts\\auto_setup_lumos-aris.bat
-```
-
-Choose a local Qwen2.5-Coder model size when needed:
-
-```powershell
-.\\scripts\\auto_setup_lumos-aris.ps1 -Size 3b
-.\\scripts\\auto_setup_lumos-aris.ps1 -Size 7b
-.\\scripts\\auto_setup_lumos-aris.ps1 -Size 14b
-```
-
-The automatic setup verifies Bun, Ollama, workspace dependencies, the local model configuration, and the ArkansasIo Agent Lumos Aris TypeScript build before starting the application. Use `-SkipModelPull` to skip downloading a model and `-SkipStart` to perform setup/validation without launching ArkansasIo Agent Lumos Aris.
-
-### Windows documentation
-
-- [Windows Setup](./docs/WINDOWS_SETUP.md)
-- [Project Setup Reference](./docs/PROJECT_SETUP.md)
-- [Automatic Setup](./AUTO_SETUP.md)
+<p align="center">
+  <strong>ArkansasIo Agent Lumos Aris</strong><br>
+  AI-assisted software engineering for developers, projects, and autonomous workflows.
+</p>
