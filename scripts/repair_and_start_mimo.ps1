@@ -52,20 +52,36 @@ try {
 }
 
 Write-Host "Installing/verifying Bun workspace dependencies..." -ForegroundColor Cyan
-& $bunPath install
+& $bunPath install --force
 if ($LASTEXITCODE -ne 0) {
   throw "bun install failed with exit code $LASTEXITCODE. Fix the install error before starting MiMoCode."
 }
 
-$required = @(
-  "node_modules\@mimo-ai\shared",
-  "node_modules\@mimo-ai\sdk",
-  "node_modules\@effect\opentelemetry",
-  "node_modules\effect"
-)
-$missing = $required | Where-Object { -not (Test-Path (Join-Path $root $_)) }
-if ($missing.Count -gt 0) {
-  throw "Workspace dependencies are still missing after bun install: $($missing -join ', ')"
+Write-Host "Verifying MiMoCode module resolution..." -ForegroundColor Cyan
+$probe = @'
+const modules = [
+  "@mimo-ai/shared/filesystem",
+  "@mimo-ai/sdk/v2",
+  "@effect/opentelemetry/Tracer",
+  "effect"
+]
+for (const name of modules) {
+  try {
+    await import(name)
+    console.log("OK", name)
+  } catch (error) {
+    console.error("MISSING", name, error instanceof Error ? error.message : error)
+    process.exitCode = 1
+  }
+}
+'@
+$probePath = Join-Path $env:TEMP "mimocode-module-probe.ts"
+Set-Content -Path $probePath -Value $probe -Encoding utf8
+& $bunPath run --cwd (Join-Path $root "packages\opencode") $probePath
+$probeExit = $LASTEXITCODE
+Remove-Item $probePath -Force -ErrorAction SilentlyContinue
+if ($probeExit -ne 0) {
+  throw "MiMoCode workspace module resolution failed after bun install. Run 'bun install --force' and provide the complete output if this persists."
 }
 
 $env:MIMOCODE_HOME = Join-Path $root ".dev-home"
