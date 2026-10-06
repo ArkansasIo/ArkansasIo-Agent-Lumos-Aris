@@ -2,8 +2,8 @@ import fs from "fs/promises"
 import path from "path"
 import os from "os"
 import { Filesystem } from "../util"
-import { Flock } from "@mimo-ai/shared/util/flock"
-import { resolveMimocodeHome } from "@mimo-ai/shared/global"
+import { Flock } from "@arkansasio/agent-lumos-aris-shared/util/flock"
+import { resolveMimocodeHome } from "@arkansasio/agent-lumos-aris-shared/global"
 
 const { data, cache, config, state } = resolveMimocodeHome()
 
