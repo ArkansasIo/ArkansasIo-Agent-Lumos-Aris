@@ -14,6 +14,21 @@ export function registerWindowsApiIpc() {
   ipcMain.handle("windows:command", (_, executable: string, args: string[] = []) => api.command(executable, args))
   ipcMain.handle("windows:pathExists", (_, path: string) => api.pathExists(path))
   ipcMain.handle("windows:apiService", () => getLumosApiService())
+  ipcMain.handle("windows:apiRequest", async (_, path: string, method = "GET", requestBody?: unknown) => {
+    if (!path.startsWith("/v1/") && path !== "/health") throw new Error("Invalid API path")
+    const service = getLumosApiService()
+    if (!service) throw new Error("Lumos Aris API unavailable")
+    const response = await fetch(service.url + path, {
+      method,
+      headers: { Authorization: "Bearer " + service.token, ...(requestBody === undefined ? {} : { "content-type": "application/json" }) },
+      body: requestBody === undefined ? undefined : JSON.stringify(requestBody),
+    })
+    const text = await response.text()
+    let data: unknown
+    try { data = JSON.parse(text) } catch { data = text }
+    if (!response.ok) throw new Error(typeof data === "object" && data && "error" in data ? String((data as {error:unknown}).error) : "API request failed: " + response.status)
+    return data
+  })
   ipcMain.handle("windows:apiHealth", () => api.apiHealth())
   ipcMain.handle("windows:apiStatus", () => api.apiStatus())
   ipcMain.handle("windows:startApi", () => api.startApi())
