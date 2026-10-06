@@ -1,4 +1,4 @@
-import { BUILT_IN_AGENTS, type ActorMatcher } from "@mimo-ai/plugin"
+import { BUILT_IN_AGENTS, type ActorMatcher } from "@arkansasio/agent-lumos-aris-plugin"
 
 const isBuiltIn = (agentType: string): boolean =>
   (BUILT_IN_AGENTS as readonly string[]).includes(agentType)
