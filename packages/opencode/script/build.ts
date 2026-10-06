@@ -14,7 +14,7 @@ process.chdir(dir)
 
 await import("./generate.ts")
 
-import { Script } from "@mimo-ai/script"
+import { Script } from "@arkansasio/agent-lumos-aris-script"
 import pkg from "../package.json"
 
 const BINARY_PREFIX = "mimocode"
@@ -263,14 +263,14 @@ for (const item of targets) {
 
   await $`rm -rf ./dist/${name}/bin/tui`
   await Bun.file(`dist/${name}/README.md`).write(
-    `This is the ${item.os}-${item.arch} binary for [@mimo-ai/cli](https://www.npmjs.com/package/@mimo-ai/cli). Install that package directly.\n`,
+    `This is the ${item.os}-${item.arch} binary for [@arkansasio/agent-lumos-aris-cli](https://www.npmjs.com/package/@arkansasio/agent-lumos-aris-cli). Install that package directly.\n`,
   )
   await Bun.file(`dist/${name}/package.json`).write(
     JSON.stringify(
       {
-        name: `@mimo-ai/${name}`,
+        name: `@arkansasio/agent-lumos-aris-${name}`,
         version: Script.version,
-        description: "Platform-specific binary for @mimo-ai/cli.",
+        description: "Platform-specific binary for @arkansasio/agent-lumos-aris-cli.",
         license: "MIT",
         author: "Xiaomi MiMo Team",
         homepage: "https://mimo.xiaomi.com/coder",
