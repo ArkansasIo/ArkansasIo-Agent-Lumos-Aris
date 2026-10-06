@@ -11,6 +11,14 @@ if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error("Inv
 
 const token = process.env.LUMOS_ARIS_API_TOKEN || crypto.randomUUID()
 const enablePowerShell = process.env.LUMOS_ARIS_API_ENABLE_POWERSHELL === "1"
+const projects = new Map<string, { id: string; name: string; status: string; createdAt: string }>()
+const jobs = new Map<string, { id: string; type: string; status: string; createdAt: string; result?: unknown }>()
+const audit: Array<{ id: string; action: string; timestamp: string; details?: unknown }> = []
+function recordAudit(action: string, details?: unknown) {
+  audit.unshift({ id: crypto.randomUUID(), action, timestamp: new Date().toISOString(), details })
+  if (audit.length > 500) audit.length = 500
+}
+
 const defaultCommands = ["ver", "whoami", "hostname", "systeminfo", "git", "node", "bun", "npm"]
 const allowedCommands = new Set(
   (process.env.LUMOS_ARIS_API_ALLOW_COMMANDS || defaultCommands.join(",")).split(",").map((v) => v.trim().toLowerCase()).filter(Boolean),
@@ -34,6 +42,50 @@ async function handle(request: Request): Promise<Response> {
 
   if (request.method === "GET" && url.pathname === "/health")
     return json({ ok: true, service: "lumos-aris-api", version: "0.1.0", host, port })
+
+  if (request.method === "GET" && url.pathname === "/v1/projects") {
+    return json({ projects: [...projects.values()] })
+  }
+
+  if (request.method === "POST" && url.pathname === "/v1/projects") {
+    const data = await body(request)
+    const name = typeof data.name === "string" ? data.name.trim() : ""
+    if (!name || name.length > 160) return json({ error: "name is required and must be <= 160 characters" }, 400)
+    const project = { id: crypto.randomUUID(), name, status: "active", createdAt: new Date().toISOString() }
+    projects.set(project.id, project)
+    recordAudit("project.create", project)
+    return json({ project }, 201)
+  }
+
+  if (request.method === "GET" && url.pathname === "/v1/jobs") {
+    return json({ jobs: [...jobs.values()] })
+  }
+
+  if (request.method === "POST" && url.pathname === "/v1/jobs") {
+    const data = await body(request)
+    const type = typeof data.type === "string" ? data.type.trim() : ""
+    if (!type || type.length > 80) return json({ error: "type is required and must be <= 80 characters" }, 400)
+    const job = { id: crypto.randomUUID(), type, status: "queued", createdAt: new Date().toISOString() }
+    jobs.set(job.id, job)
+    recordAudit("job.create", { id: job.id, type })
+    queueMicrotask(() => {
+      const current = jobs.get(job.id)
+      if (!current) return
+      current.status = "running"
+      setTimeout(() => {
+        const completed = jobs.get(job.id)
+        if (!completed) return
+        completed.status = "completed"
+        completed.result = { message: `Lumos Aris job '${type}' completed` }
+        recordAudit("job.complete", { id: job.id, type })
+      }, 50)
+    })
+    return json({ job }, 202)
+  }
+
+  if (request.method === "GET" && url.pathname === "/v1/audit") {
+    return json({ events: audit })
+  }
 
   if (request.method === "GET" && url.pathname === "/v1/system")
     return json({ platform: platform(), release: release(), arch: arch(), hostname: hostname(), home: homedir(), cpuCount: cpus().length, memoryBytes: totalmem(), freeMemoryBytes: freemem(), isWindows: process.platform === "win32" })
