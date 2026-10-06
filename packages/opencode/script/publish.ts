@@ -42,20 +42,20 @@ await Bun.file(`./dist/${pkg.name}/package.json`).write(
     {
       name: pkg.name,
       version: version,
-      description: "MiMo Code: Where Models and Agents Co-Evolve",
+      description: "Lumos-Aris: Where Models and Agents Co-Evolve",
       license: "MIT",
-      author: "Xiaomi MiMo Team",
-      homepage: "https://mimo.xiaomi.com/coder",
+      author: "Xiaomi Lumos-Aris Team",
+      homepage: "https://lumos-aris.xiaomi.com/coder",
       repository: {
         type: "git",
-        url: "git+https://github.com/XiaomiMiMo/MiMo-Code.git",
+        url: "git+https://github.com/XiaomiLumos-Aris/Lumos-Aris-Code.git",
       },
       bugs: {
-        url: "https://github.com/XiaomiMiMo/MiMo-Code/issues",
+        url: "https://github.com/XiaomiLumos-Aris/Lumos-Aris-Code/issues",
       },
-      keywords: ["ai", "cli", "code", "xiaomi", "mimo", "mimocode"],
+      keywords: ["ai", "cli", "code", "xiaomi", "lumos-aris", "lumos-aris"],
       bin: {
-        mimo: "./bin/mimo",
+        lumos-aris: "./bin/lumos-aris",
       },
       scripts: {
         postinstall: "bun ./postinstall.mjs || node ./postinstall.mjs",

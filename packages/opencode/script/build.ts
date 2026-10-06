@@ -17,7 +17,7 @@ await import("./generate.ts")
 import { Script } from "@arkansasio/agent-lumos-aris-script"
 import pkg from "../package.json"
 
-const BINARY_PREFIX = "mimocode"
+const BINARY_PREFIX = "lumos-aris"
 
 // Load migrations from migration directories
 const migrationDirs = (
@@ -170,7 +170,7 @@ await $`rm -rf dist`
 
 const extDir = path.join(dir, "src", "ext")
 if (!fs.existsSync(extDir)) {
-  const overlaySrc = path.resolve(dir, "../../mimoapi/packages/opencode/src/ext")
+  const overlaySrc = path.resolve(dir, "../../lumos-arisapi/packages/opencode/src/ext")
   if (fs.existsSync(overlaySrc)) {
     console.log(`Staging overlay entrypoints from ${overlaySrc}`)
     fs.cpSync(overlaySrc, extDir, { recursive: true })
@@ -232,25 +232,25 @@ for (const item of targets) {
       autoloadTsconfig: true,
       autoloadPackageJson: true,
       target: name.replace(BINARY_PREFIX, "bun") as any,
-      outfile: `dist/${name}/bin/mimo`,
-      execArgv: [`--user-agent=mimocode/${Script.version}`, "--use-system-ca", "--"],
+      outfile: `dist/${name}/bin/lumos-aris`,
+      execArgv: [`--user-agent=lumos-aris/${Script.version}`, "--use-system-ca", "--"],
       windows: {},
     },
     files: embeddedFileMap ? { "opencode-web-ui.gen.ts": embeddedFileMap } : {},
     entrypoints: ["./src/index.ts", parserWorker, workerPath, ...(embeddedFileMap ? ["opencode-web-ui.gen.ts"] : []), ...extEntrypoints],
     define: {
-      MIMOCODE_VERSION: `'${Script.version}'`,
+      LUMOS_ARIS_VERSION: `'${Script.version}'`,
       OPENCODE_MIGRATIONS: JSON.stringify(migrations),
       OTUI_TREE_SITTER_WORKER_PATH: bunfsRoot + workerRelativePath,
       OPENCODE_WORKER_PATH: workerPath,
-      MIMOCODE_CHANNEL: `'${Script.channel}'`,
+      LUMOS_ARIS_CHANNEL: `'${Script.channel}'`,
       OPENCODE_LIBC: item.os === "linux" ? `'${item.abi ?? "glibc"}'` : "",
     },
   })
 
   // Smoke test: only run if binary is for current platform
   if (item.os === process.platform && item.arch === process.arch && !item.abi) {
-    const binaryPath = `dist/${name}/bin/mimo`
+    const binaryPath = `dist/${name}/bin/lumos-aris`
     console.log(`Running smoke test: ${binaryPath} --version`)
     try {
       const versionOutput = await $`${binaryPath} --version`.text()
@@ -272,13 +272,13 @@ for (const item of targets) {
         version: Script.version,
         description: "Platform-specific binary for @arkansasio/agent-lumos-aris-cli.",
         license: "MIT",
-        author: "Xiaomi MiMo Team",
-        homepage: "https://mimo.xiaomi.com/coder",
+        author: "Xiaomi Lumos-Aris Team",
+        homepage: "https://lumos-aris.xiaomi.com/coder",
         repository: {
           type: "git",
-          url: "git+https://github.com/XiaomiMiMo/MiMo-Code.git",
+          url: "git+https://github.com/XiaomiLumos-Aris/Lumos-Aris-Code.git",
         },
-        keywords: ["ai", "coding", "agent", "cli", "mimo"],
+        keywords: ["ai", "coding", "agent", "cli", "lumos-aris"],
         os: [item.os],
         cpu: [item.arch],
       },
