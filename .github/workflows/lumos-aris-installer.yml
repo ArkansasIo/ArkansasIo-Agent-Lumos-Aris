@@ -1,0 +1,48 @@
+name: Lumos Aris Installer Smoke Test
+
+on:
+  push:
+    branches: ["main", "feat/lumos-aris-native-installer"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  windows-installer:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.11
+      - name: Install dependencies
+        run: bun install --linker hoisted
+      - name: Typecheck
+        run: bun run typecheck
+      - name: API contract tests
+        run: bun --cwd packages/api test
+      - name: Build API executable
+        run: bun run build:api:win
+      - name: Verify API executable
+        shell: pwsh
+        run: |
+          if (!(Test-Path "packages/api/dist/lumos-aris-api.exe")) {
+            throw "API executable was not produced."
+          }
+          Get-Item "packages/api/dist/lumos-aris-api.exe" | Select-Object FullName,Length
+
+  linux-installer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.11
+      - name: Install dependencies
+        run: bun install --linker hoisted
+      - name: API contract tests
+        run: bun --cwd packages/api test
+      - name: Validate CLI
+        run: |
+          node --check scripts/lumos-aris-cli.mjs
+          test -f scripts/install_lumos_aris.sh
+          test -f scripts/lumos_aris_api.sh
