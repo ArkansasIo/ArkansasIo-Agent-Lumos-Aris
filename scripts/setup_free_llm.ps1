@@ -1,9 +1,9 @@
-$ErrorActionPreference = "Stop"
-
 param(
   [ValidateSet("0.5b","1.5b","3b","7b","14b","32b")]
   [string]$Size = "7b"
 )
+
+$ErrorActionPreference = "Stop"
 
 $model = "qwen2.5-coder:$Size"
 $root = Split-Path -Parent $PSScriptRoot
@@ -20,6 +20,7 @@ if (-not (Get-Command ollama -ErrorAction SilentlyContinue)) {
     $answer = Read-Host "Install Ollama with winget now? [Y/n]"
     if ($answer -notmatch '^[Nn]') {
       winget install --id Ollama.Ollama -e --accept-package-agreements --accept-source-agreements
+      $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
     } else {
       throw "Install Ollama from https://ollama.com/download/windows and rerun this script."
     }
@@ -28,10 +29,11 @@ if (-not (Get-Command ollama -ErrorAction SilentlyContinue)) {
   }
 }
 
-$ollama = (Get-Command ollama -ErrorAction SilentlyContinue).Source
-if (-not $ollama) {
-  throw "Ollama was installed but is not yet visible in PATH. Restart PowerShell and rerun."
+$ollamaCommand = Get-Command ollama -ErrorAction SilentlyContinue
+if (-not $ollamaCommand) {
+  throw "Ollama is installed but is not yet visible in PATH. Restart PowerShell and rerun this script."
 }
+$ollama = $ollamaCommand.Source
 
 try {
   Invoke-RestMethod -Uri "http://127.0.0.1:11434/api/tags" -TimeoutSec 3 | Out-Null
