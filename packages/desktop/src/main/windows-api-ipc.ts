@@ -14,6 +14,10 @@ export function registerWindowsApiIpc() {
   ipcMain.handle("windows:command", (_, executable: string, args: string[] = []) => api.command(executable, args))
   ipcMain.handle("windows:pathExists", (_, path: string) => api.pathExists(path))
   ipcMain.handle("windows:apiService", () => getLumosApiService())
+  ipcMain.handle("windows:apiHealth", () => api.apiHealth())
+  ipcMain.handle("windows:apiStatus", () => api.apiStatus())
+  ipcMain.handle("windows:startApi", () => api.startApi())
+  ipcMain.handle("windows:stopApi", () => api.stopApi())
   ipcMain.handle("windows:revealPath", (_, path: string) => api.revealPath(path))
   ipcMain.handle("windows:setPowerShellPolicy", (_, policy: "restricted" | "remote-signed" | "bypass") => api.setPowerShellPolicy(policy))
 }
