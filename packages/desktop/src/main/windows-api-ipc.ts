@@ -1,5 +1,6 @@
 import { ipcMain } from "electron"
 import { createWindowsApi } from "./lumos-windows-api"
+import { getLumosApiService } from "./lumos-api-service"
 
 export function registerWindowsApiIpc() {
   const api = createWindowsApi()
@@ -12,6 +13,7 @@ export function registerWindowsApiIpc() {
   ipcMain.handle("windows:powershell", (_, script: string) => api.powershell(script))
   ipcMain.handle("windows:command", (_, executable: string, args: string[] = []) => api.command(executable, args))
   ipcMain.handle("windows:pathExists", (_, path: string) => api.pathExists(path))
+  ipcMain.handle("windows:apiService", () => getLumosApiService())
   ipcMain.handle("windows:revealPath", (_, path: string) => api.revealPath(path))
   ipcMain.handle("windows:setPowerShellPolicy", (_, policy: "restricted" | "remote-signed" | "bypass") => api.setPowerShellPolicy(policy))
 }
