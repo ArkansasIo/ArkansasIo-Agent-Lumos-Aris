@@ -13,7 +13,6 @@ export function registerWindowsApiIpc() {
   ipcMain.handle("windows:powershell", (_, script: string) => api.powershell(script))
   ipcMain.handle("windows:command", (_, executable: string, args: string[] = []) => api.command(executable, args))
   ipcMain.handle("windows:pathExists", (_, path: string) => api.pathExists(path))
-  ipcMain.handle("windows:apiService", () => getLumosApiService())
   ipcMain.handle("windows:apiRequest", async (_, path: string, method = "GET", requestBody?: unknown) => {
     if (!path.startsWith("/v1/") && path !== "/health") throw new Error("Invalid API path")
     const service = getLumosApiService()
