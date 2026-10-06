@@ -1,10 +1,50 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "provider": {},
+  "enabled_providers": ["ollama"],
+  "model": "ollama/qwen2.5-coder:7b",
+  "small_model": "ollama/qwen2.5-coder:7b",
+  "provider": {
+    "ollama": {
+      "name": "Ollama (Local / Free)",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://127.0.0.1:11434/v1",
+        "apiKey": "ollama",
+        "timeout": false,
+        "chunkTimeout": 480000
+      },
+      "models": {
+        "qwen2.5-coder:7b": {
+          "name": "Qwen2.5 Coder 7B (Local)",
+          "reasoning": false,
+          "tool_call": true,
+          "temperature": true,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cache_read": 0,
+            "cache_write": 0
+          },
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          },
+          "modalities": {
+            "input": ["text"],
+            "output": ["text"]
+          },
+          "provider": {
+            "npm": "@ai-sdk/openai-compatible",
+            "api": "http://127.0.0.1:11434/v1"
+          }
+        }
+      }
+    }
+  },
   "permission": {
     "edit": {
-      "packages/opencode/migration/*": "deny",
-    },
+      "packages/opencode/migration/*": "deny"
+    }
   },
-  "mcp": {},
+  "mcp": {}
 }
