@@ -22,9 +22,11 @@ const native=()=>((window as Window & {lumosWindows?:any}).lumosWindows)
 const [apiStatus,setApiStatus]=createSignal<{healthy:boolean;endpoint:string}>({healthy:false,endpoint:"http://127.0.0.1:47991"})
 const [apiError,setApiError]=createSignal("")
 const [apiBusy,setApiBusy]=createSignal(false)
+const [projects,setProjects]=createSignal<any[]>([]);const [jobs,setJobs]=createSignal<any[]>([]);const [audit,setAudit]=createSignal<any[]>([])
+const loadOperationalData=async()=>{const x=native();if(!x)return;const service=await x.apiService();if(!service)return;const request=async(path:string)=>{const response=await fetch(service.url+path,{headers:{Authorization:"Bearer "+service.token}});if(!response.ok)throw new Error("API request failed: "+response.status);return response.json()};try{const [p,j,a]=await Promise.all([request("/v1/projects"),request("/v1/jobs"),request("/v1/audit")]);setProjects(p.projects||[]);setJobs(j.jobs||[]);setAudit(a.events||[])}catch(error){setApiError(error instanceof Error?error.message:String(error))}}
 const refreshApi=async()=>{const x=native();if(!x)return;const s=await x.apiStatus();setApiStatus(s);const h=await x.apiHealth();setApiError(h.ok?"":(h.error||"API unavailable"))}
 const apiAction=async(action:"startApi"|"stopApi")=>{const x=native();if(!x)return;setApiBusy(true);setApiError("");try{const result=await x[action]();if(!result.ok)setApiError(result.error||"API operation failed");await refreshApi()}catch(error){setApiError(error instanceof Error?error.message:String(error))}finally{setApiBusy(false)}}
-void refreshApi();const timer=setInterval(refreshApi,5000);onCleanup(()=>clearInterval(timer))
+void refreshApi();void loadOperationalData();const timer=setInterval(()=>{void refreshApi();void loadOperationalData()},5000);onCleanup(()=>clearInterval(timer))
 const panel=()=>panels[view()]
 const select=(id:View)=>{setView(id);if(id==="engineering")navigate("/engineering");if(id==="whiteboard")navigate("/whiteboard");if(id==="api")navigate("/api-console")}
 return <div class="h-dvh w-full bg-background-base text-text-base flex overflow-hidden">
