@@ -32,6 +32,10 @@ export type WindowsApi = {
   pathExists(path: string): Promise<boolean>
   revealPath(path: string): Promise<void>
   setPowerShellPolicy(policy: "restricted" | "remote-signed" | "bypass"): Promise<{ stdout: string; stderr: string }>
+  apiHealth(): Promise<{ ok: boolean; service?: string; version?: string; error?: string }>
+  apiStatus(): Promise<{ healthy: boolean; endpoint: string }>
+  startApi(): Promise<{ ok: boolean; error?: string }>
+  stopApi(): Promise<{ ok: boolean }>
 }
 
 function assertSafeExternalUrl(url: string) {
@@ -91,6 +95,16 @@ export function createWindowsApi(): WindowsApi {
       if (!existsSync(path)) throw new Error("Path does not exist: " + path)
       shell.showItemInFolder(path)
     },
+    async apiHealth() {
+      try {
+        const response = await fetch("http://127.0.0.1:47991/health")
+        const data = await response.json() as { ok?: boolean; service?: string; version?: string }
+        return { ok: response.ok && data.ok === true, service: data.service, version: data.version }
+      } catch (error) { return { ok: false, error: error instanceof Error ? error.message : String(error) } }
+    },
+    async apiStatus() { const health = await this.apiHealth(); return { healthy: health.ok, endpoint: "http://127.0.0.1:47991" } },
+    async startApi() { const { startLumosApiService } = await import("./lumos-api-service"); return startLumosApiService() ? { ok: true } : { ok: false, error: "API executable unavailable or already running" } },
+    async stopApi() { const { stopLumosApiService } = await import("./lumos-api-service"); stopLumosApiService(); return { ok: true } },
     async setPowerShellPolicy(policy) {
       if (process.platform !== "win32") throw new Error("PowerShell policy API is only available on Windows")
       return execFileAsync("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy " + policy + " -Force"], { windowsHide: true })
