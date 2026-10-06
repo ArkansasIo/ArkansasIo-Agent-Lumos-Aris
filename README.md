@@ -258,3 +258,35 @@ The local OpenAI-compatible endpoint is http://127.0.0.1:11434/v1. Ollama provid
 ### Offline/privacy behavior
 
 The inference request is sent to the local Ollama server on 127.0.0.1. MiMoCode still retains its normal optional web/MCP capabilities, so those should be disabled separately if you want a completely offline installation.
+
+
+## Windows automatic setup
+
+For Windows users, the repository includes a complete setup and repair path. From the repository root:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\\scripts\\auto_setup_mimo.ps1
+```
+
+Or from Command Prompt:
+
+```bat
+scripts\\auto_setup_mimo.bat
+```
+
+Choose a local Qwen2.5-Coder model size when needed:
+
+```powershell
+.\\scripts\\auto_setup_mimo.ps1 -Size 3b
+.\\scripts\\auto_setup_mimo.ps1 -Size 7b
+.\\scripts\\auto_setup_mimo.ps1 -Size 14b
+```
+
+The automatic setup verifies Bun, Ollama, workspace dependencies, the local model configuration, and the MiMoCode TypeScript build before starting the application. Use `-SkipModelPull` to skip downloading a model and `-SkipStart` to perform setup/validation without launching MiMoCode.
+
+### Windows documentation
+
+- [Windows Setup](./docs/WINDOWS_SETUP.md)
+- [Project Setup Reference](./docs/PROJECT_SETUP.md)
+- [Automatic Setup](./AUTO_SETUP.md)
