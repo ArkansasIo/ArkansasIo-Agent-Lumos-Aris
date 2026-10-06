@@ -8,6 +8,8 @@ $ErrorActionPreference = "Stop"
 $model = "qwen2.5-coder:$Size"
 $root = Split-Path -Parent $PSScriptRoot
 $configPath = Join-Path $root ".mimocode\mimocode.jsonc"
+$configDir = Split-Path -Parent $configPath
+New-Item -ItemType Directory -Path $configDir -Force | Out-Null
 
 Write-Host "=== MiMoCode FREE LOCAL LLM SETUP ===" -ForegroundColor Cyan
 Write-Host "Model: $model"
