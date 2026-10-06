@@ -1,5 +1,8 @@
 [install]
 exact = true
+# Windows native addons (tree-sitter/node-gyp) can exceed MAX_PATH with Bun isolated installs.
+# Hoisted installs keep lifecycle-script working directories short enough for MSBuild.
+linker = "hoisted"
 
 [test]
 root = "./do-not-run-tests-from-root"
