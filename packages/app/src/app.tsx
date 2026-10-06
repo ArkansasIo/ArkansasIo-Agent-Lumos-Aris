@@ -51,6 +51,7 @@ const ControlCenterRoute = lazy(() => import("@/pages/control-center"))
 const WorkspaceRoute = lazy(() => import("@/pages/workspace"))
 const WhiteboardRoute = lazy(() => import("@/pages/whiteboard"))
 const EngineeringRoute = lazy(() => import("@/pages/engineering"))
+const ApiConsoleRoute = lazy(() => import("@/pages/api-console"))
 const loadSession = () => import("@/pages/session")
 const Session = lazy(loadSession)
 const Loading = () => <div class="size-full" />
@@ -306,6 +307,7 @@ export function AppInterface(props: {
                   <Route path="/control" component={ControlCenterRoute} />
                   <Route path="/engineering" component={EngineeringRoute} />
                   <Route path="/whiteboard" component={WhiteboardRoute} />
+                  <Route path="/api-console" component={ApiConsoleRoute} />
                   <Route path="/:workspace" component={WorkspaceRoute} />
                   <Route path="/:dir" component={DirectoryLayout}>
                     <Route path="/" component={SessionIndexRoute} />
