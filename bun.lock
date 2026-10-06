@@ -6,9 +6,9 @@
       "name": "opencode",
       "dependencies": {
         "@aws-sdk/client-s3": "3.933.0",
-        "@mimo-ai/plugin": "workspace:*",
-        "@mimo-ai/script": "workspace:*",
-        "@mimo-ai/sdk": "workspace:*",
+        "@arkansasio/agent-lumos-aris-plugin": "workspace:*",
+        "@arkansasio/agent-lumos-aris-script": "workspace:*",
+        "@arkansasio/agent-lumos-aris-sdk": "workspace:*",
         "heap-snapshot-toolkit": "1.1.3",
         "typescript": "catalog:",
       },
@@ -28,13 +28,13 @@
       },
     },
     "packages/app": {
-      "name": "@mimo-ai/app",
+      "name": "@arkansasio/agent-lumos-aris-app",
       "version": "0.1.1",
       "dependencies": {
         "@kobalte/core": "catalog:",
-        "@mimo-ai/sdk": "workspace:*",
-        "@mimo-ai/shared": "workspace:*",
-        "@mimo-ai/ui": "workspace:*",
+        "@arkansasio/agent-lumos-aris-sdk": "workspace:*",
+        "@arkansasio/agent-lumos-aris-shared": "workspace:*",
+        "@arkansasio/agent-lumos-aris-ui": "workspace:*",
         "@shikijs/transformers": "3.9.2",
         "@solid-primitives/active-element": "2.1.3",
         "@solid-primitives/audio": "1.4.2",
@@ -82,17 +82,17 @@
       },
     },
     "packages/console/app": {
-      "name": "@mimo-ai/console-app",
+      "name": "@arkansasio/agent-lumos-aris-console-app",
       "version": "0.1.1",
       "dependencies": {
         "@cloudflare/vite-plugin": "1.15.2",
         "@ibm/plex": "6.4.1",
         "@jsx-email/render": "1.1.1",
         "@kobalte/core": "catalog:",
-        "@mimo-ai/console-core": "workspace:*",
-        "@mimo-ai/console-mail": "workspace:*",
-        "@mimo-ai/console-resource": "workspace:*",
-        "@mimo-ai/ui": "workspace:*",
+        "@arkansasio/agent-lumos-aris-console-core": "workspace:*",
+        "@arkansasio/agent-lumos-aris-console-mail": "workspace:*",
+        "@arkansasio/agent-lumos-aris-console-resource": "workspace:*",
+        "@arkansasio/agent-lumos-aris-ui": "workspace:*",
         "@openauthjs/openauth": "catalog:",
         "@smithy/eventstream-codec": "4.2.7",
         "@smithy/util-utf8": "4.2.0",
@@ -116,13 +116,13 @@
       },
     },
     "packages/console/core": {
-      "name": "@mimo-ai/console-core",
+      "name": "@arkansasio/agent-lumos-aris-console-core",
       "version": "0.1.1",
       "dependencies": {
         "@aws-sdk/client-sts": "3.782.0",
         "@jsx-email/render": "1.1.1",
-        "@mimo-ai/console-mail": "workspace:*",
-        "@mimo-ai/console-resource": "workspace:*",
+        "@arkansasio/agent-lumos-aris-console-mail": "workspace:*",
+        "@arkansasio/agent-lumos-aris-console-resource": "workspace:*",
         "@planetscale/database": "1.19.0",
         "aws4fetch": "1.0.20",
         "drizzle-orm": "catalog:",
@@ -143,15 +143,15 @@
       },
     },
     "packages/console/function": {
-      "name": "@mimo-ai/console-function",
+      "name": "@arkansasio/agent-lumos-aris-console-function",
       "version": "0.1.1",
       "dependencies": {
         "@ai-sdk/anthropic": "3.0.64",
         "@ai-sdk/openai": "3.0.48",
         "@ai-sdk/openai-compatible": "2.0.37",
         "@hono/zod-validator": "catalog:",
-        "@mimo-ai/console-core": "workspace:*",
-        "@mimo-ai/console-resource": "workspace:*",
+        "@arkansasio/agent-lumos-aris-console-core": "workspace:*",
+        "@arkansasio/agent-lumos-aris-console-resource": "workspace:*",
         "@openauthjs/openauth": "0.0.0-20250322224806",
         "ai": "catalog:",
         "hono": "catalog:",
@@ -167,7 +167,7 @@
       },
     },
     "packages/console/mail": {
-      "name": "@mimo-ai/console-mail",
+      "name": "@arkansasio/agent-lumos-aris-console-mail",
       "version": "0.1.1",
       "dependencies": {
         "@jsx-email/all": "2.2.3",
@@ -179,7 +179,7 @@
       },
     },
     "packages/console/resource": {
-      "name": "@mimo-ai/console-resource",
+      "name": "@arkansasio/agent-lumos-aris-console-resource",
       "dependencies": {
         "@cloudflare/workers-types": "catalog:",
       },
@@ -191,7 +191,7 @@
       },
     },
     "packages/desktop": {
-      "name": "@mimo-ai/desktop",
+      "name": "@arkansasio/agent-lumos-aris-desktop",
       "version": "0.1.1",
       "dependencies": {
         "drizzle-orm": "catalog:",
@@ -206,8 +206,8 @@
       "devDependencies": {
         "@actions/artifact": "4.0.0",
         "@lydell/node-pty": "catalog:",
-        "@mimo-ai/app": "workspace:*",
-        "@mimo-ai/ui": "workspace:*",
+        "@arkansasio/agent-lumos-aris-app": "workspace:*",
+        "@arkansasio/agent-lumos-aris-ui": "workspace:*",
         "@solid-primitives/i18n": "2.2.1",
         "@solid-primitives/storage": "catalog:",
         "@solidjs/meta": "catalog:",
@@ -235,11 +235,11 @@
       },
     },
     "packages/enterprise": {
-      "name": "@mimo-ai/enterprise",
+      "name": "@arkansasio/agent-lumos-aris-enterprise",
       "version": "0.1.1",
       "dependencies": {
-        "@mimo-ai/shared": "workspace:*",
-        "@mimo-ai/ui": "workspace:*",
+        "@arkansasio/agent-lumos-aris-shared": "workspace:*",
+        "@arkansasio/agent-lumos-aris-ui": "workspace:*",
         "@pierre/diffs": "catalog:",
         "@solidjs/meta": "catalog:",
         "@solidjs/router": "catalog:",
@@ -264,7 +264,7 @@
       },
     },
     "packages/function": {
-      "name": "@mimo-ai/function",
+      "name": "@arkansasio/agent-lumos-aris-function",
       "version": "0.1.1",
       "dependencies": {
         "@octokit/auth-app": "8.0.1",
@@ -280,7 +280,7 @@
       },
     },
     "packages/opencode": {
-      "name": "@mimo-ai/cli",
+      "name": "@arkansasio/agent-lumos-aris-cli",
       "version": "0.1.1",
       "bin": {
         "mimo": "./bin/mimo",
@@ -320,10 +320,10 @@
         "@hono/zod-validator": "catalog:",
         "@jitl/quickjs-singlefile-mjs-release-sync": "0.32.0",
         "@lydell/node-pty": "catalog:",
-        "@mimo-ai/plugin": "workspace:*",
-        "@mimo-ai/script": "workspace:*",
-        "@mimo-ai/sdk": "workspace:*",
-        "@mimo-ai/ui": "workspace:*",
+        "@arkansasio/agent-lumos-aris-plugin": "workspace:*",
+        "@arkansasio/agent-lumos-aris-script": "workspace:*",
+        "@arkansasio/agent-lumos-aris-sdk": "workspace:*",
+        "@arkansasio/agent-lumos-aris-ui": "workspace:*",
         "@modelcontextprotocol/sdk": "1.27.1",
         "@npmcli/arborist": "9.4.0",
         "@npmcli/config": "10.8.1",
@@ -399,8 +399,8 @@
       "devDependencies": {
         "@babel/core": "7.28.4",
         "@effect/language-service": "0.84.2",
-        "@mimo-ai/script": "workspace:*",
-        "@mimo-ai/shared": "workspace:*",
+        "@arkansasio/agent-lumos-aris-script": "workspace:*",
+        "@arkansasio/agent-lumos-aris-shared": "workspace:*",
         "@octokit/webhooks-types": "7.6.1",
         "@parcel/watcher-darwin-arm64": "2.5.1",
         "@parcel/watcher-darwin-x64": "2.5.1",
@@ -434,10 +434,10 @@
       },
     },
     "packages/plugin": {
-      "name": "@mimo-ai/plugin",
+      "name": "@arkansasio/agent-lumos-aris-plugin",
       "version": "0.1.1",
       "dependencies": {
-        "@mimo-ai/sdk": "workspace:*",
+        "@arkansasio/agent-lumos-aris-sdk": "workspace:*",
         "effect": "catalog:",
         "zod": "catalog:",
       },
@@ -459,7 +459,7 @@
       ],
     },
     "packages/script": {
-      "name": "@mimo-ai/script",
+      "name": "@arkansasio/agent-lumos-aris-script",
       "dependencies": {
         "semver": "^7.6.3",
       },
@@ -469,7 +469,7 @@
       },
     },
     "packages/sdk/js": {
-      "name": "@mimo-ai/sdk",
+      "name": "@arkansasio/agent-lumos-aris-sdk",
       "version": "0.1.1",
       "dependencies": {
         "cross-spawn": "catalog:",
@@ -484,7 +484,7 @@
       },
     },
     "packages/shared": {
-      "name": "@mimo-ai/shared",
+      "name": "@arkansasio/agent-lumos-aris-shared",
       "version": "0.1.1",
       "bin": {
         "opencode": "./bin/opencode",
@@ -508,10 +508,10 @@
       },
     },
     "packages/slack": {
-      "name": "@mimo-ai/slack",
+      "name": "@arkansasio/agent-lumos-aris-slack",
       "version": "0.1.1",
       "dependencies": {
-        "@mimo-ai/sdk": "workspace:*",
+        "@arkansasio/agent-lumos-aris-sdk": "workspace:*",
         "@slack/bolt": "^3.17.1",
       },
       "devDependencies": {
@@ -521,9 +521,9 @@
       },
     },
     "packages/storybook": {
-      "name": "@mimo-ai/storybook",
+      "name": "@arkansasio/agent-lumos-aris-storybook",
       "devDependencies": {
-        "@mimo-ai/ui": "workspace:*",
+        "@arkansasio/agent-lumos-aris-ui": "workspace:*",
         "@solidjs/meta": "catalog:",
         "@storybook/addon-a11y": "^10.2.13",
         "@storybook/addon-docs": "^10.2.13",
@@ -543,12 +543,12 @@
       },
     },
     "packages/ui": {
-      "name": "@mimo-ai/ui",
+      "name": "@arkansasio/agent-lumos-aris-ui",
       "version": "0.1.1",
       "dependencies": {
         "@kobalte/core": "catalog:",
-        "@mimo-ai/sdk": "workspace:*",
-        "@mimo-ai/shared": "workspace:*",
+        "@arkansasio/agent-lumos-aris-sdk": "workspace:*",
+        "@arkansasio/agent-lumos-aris-shared": "workspace:*",
         "@pierre/diffs": "catalog:",
         "@shikijs/transformers": "3.9.2",
         "@solid-primitives/bounds": "0.1.3",
@@ -592,7 +592,7 @@
       },
     },
     "packages/web": {
-      "name": "@mimo-ai/web",
+      "name": "@arkansasio/agent-lumos-aris-web",
       "version": "0.1.1",
       "dependencies": {
         "@astrojs/cloudflare": "12.6.3",
@@ -620,7 +620,7 @@
       },
       "devDependencies": {
         "@astrojs/check": "0.9.6",
-        "@mimo-ai/cli": "workspace:*",
+        "@arkansasio/agent-lumos-aris-cli": "workspace:*",
         "@types/node": "catalog:",
         "typescript": "catalog:",
       },
@@ -1408,41 +1408,41 @@
 
     "@mdx-js/react": ["@mdx-js/react@3.1.1", "", { "dependencies": { "@types/mdx": "^2.0.0" }, "peerDependencies": { "@types/react": ">=16", "react": ">=16" } }, "sha512-f++rKLQgUVYDAtECQ6fn/is15GkEH9+nZPM3MS0RcxVqoTfawHvDlSCH7JbMhAM6uJ32v3eXLvLmLvjGu7PTQw=="],
 
-    "@mimo-ai/app": ["@mimo-ai/app@workspace:packages/app"],
+    "@arkansasio/agent-lumos-aris-app": ["@arkansasio/agent-lumos-aris-app@workspace:packages/app"],
 
-    "@mimo-ai/cli": ["@mimo-ai/cli@workspace:packages/opencode"],
+    "@arkansasio/agent-lumos-aris-cli": ["@arkansasio/agent-lumos-aris-cli@workspace:packages/opencode"],
 
-    "@mimo-ai/console-app": ["@mimo-ai/console-app@workspace:packages/console/app"],
+    "@arkansasio/agent-lumos-aris-console-app": ["@arkansasio/agent-lumos-aris-console-app@workspace:packages/console/app"],
 
-    "@mimo-ai/console-core": ["@mimo-ai/console-core@workspace:packages/console/core"],
+    "@arkansasio/agent-lumos-aris-console-core": ["@arkansasio/agent-lumos-aris-console-core@workspace:packages/console/core"],
 
-    "@mimo-ai/console-function": ["@mimo-ai/console-function@workspace:packages/console/function"],
+    "@arkansasio/agent-lumos-aris-console-function": ["@arkansasio/agent-lumos-aris-console-function@workspace:packages/console/function"],
 
-    "@mimo-ai/console-mail": ["@mimo-ai/console-mail@workspace:packages/console/mail"],
+    "@arkansasio/agent-lumos-aris-console-mail": ["@arkansasio/agent-lumos-aris-console-mail@workspace:packages/console/mail"],
 
-    "@mimo-ai/console-resource": ["@mimo-ai/console-resource@workspace:packages/console/resource"],
+    "@arkansasio/agent-lumos-aris-console-resource": ["@arkansasio/agent-lumos-aris-console-resource@workspace:packages/console/resource"],
 
-    "@mimo-ai/desktop": ["@mimo-ai/desktop@workspace:packages/desktop"],
+    "@arkansasio/agent-lumos-aris-desktop": ["@arkansasio/agent-lumos-aris-desktop@workspace:packages/desktop"],
 
-    "@mimo-ai/enterprise": ["@mimo-ai/enterprise@workspace:packages/enterprise"],
+    "@arkansasio/agent-lumos-aris-enterprise": ["@arkansasio/agent-lumos-aris-enterprise@workspace:packages/enterprise"],
 
-    "@mimo-ai/function": ["@mimo-ai/function@workspace:packages/function"],
+    "@arkansasio/agent-lumos-aris-function": ["@arkansasio/agent-lumos-aris-function@workspace:packages/function"],
 
-    "@mimo-ai/plugin": ["@mimo-ai/plugin@workspace:packages/plugin"],
+    "@arkansasio/agent-lumos-aris-plugin": ["@arkansasio/agent-lumos-aris-plugin@workspace:packages/plugin"],
 
-    "@mimo-ai/script": ["@mimo-ai/script@workspace:packages/script"],
+    "@arkansasio/agent-lumos-aris-script": ["@arkansasio/agent-lumos-aris-script@workspace:packages/script"],
 
-    "@mimo-ai/sdk": ["@mimo-ai/sdk@workspace:packages/sdk/js"],
+    "@arkansasio/agent-lumos-aris-sdk": ["@arkansasio/agent-lumos-aris-sdk@workspace:packages/sdk/js"],
 
-    "@mimo-ai/shared": ["@mimo-ai/shared@workspace:packages/shared"],
+    "@arkansasio/agent-lumos-aris-shared": ["@arkansasio/agent-lumos-aris-shared@workspace:packages/shared"],
 
-    "@mimo-ai/slack": ["@mimo-ai/slack@workspace:packages/slack"],
+    "@arkansasio/agent-lumos-aris-slack": ["@arkansasio/agent-lumos-aris-slack@workspace:packages/slack"],
 
-    "@mimo-ai/storybook": ["@mimo-ai/storybook@workspace:packages/storybook"],
+    "@arkansasio/agent-lumos-aris-storybook": ["@arkansasio/agent-lumos-aris-storybook@workspace:packages/storybook"],
 
-    "@mimo-ai/ui": ["@mimo-ai/ui@workspace:packages/ui"],
+    "@arkansasio/agent-lumos-aris-ui": ["@arkansasio/agent-lumos-aris-ui@workspace:packages/ui"],
 
-    "@mimo-ai/web": ["@mimo-ai/web@workspace:packages/web"],
+    "@arkansasio/agent-lumos-aris-web": ["@arkansasio/agent-lumos-aris-web@workspace:packages/web"],
 
     "@mixmark-io/domino": ["@mixmark-io/domino@2.2.0", "", {}, "sha512-Y28PR25bHXUg88kCV7nivXrP2Nj2RueZ3/l/jdx6J9f8J4nsEGcgX0Qe6lt7Pa+J79+kPiJU3LguR6O/6zrLOw=="],
 
@@ -5468,25 +5468,25 @@
 
     "@mdx-js/mdx/source-map": ["source-map@0.7.6", "", {}, "sha512-i5uvt8C3ikiWeNZSVZNWcfZPItFQOsYTUAOkcUPGd8DqDy1uOUikjt5dG+uRlwyvR108Fb9DOd4GvXfT0N2/uQ=="],
 
-    "@mimo-ai/console-function/@ai-sdk/anthropic": ["@ai-sdk/anthropic@3.0.64", "", { "dependencies": { "@ai-sdk/provider": "3.0.8", "@ai-sdk/provider-utils": "4.0.21" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-rwLi/Rsuj2pYniQXIrvClHvXDzgM4UQHHnvHTWEF14efnlKclG/1ghpNC+adsRujAbCTr6gRsSbDE2vEqriV7g=="],
+    "@arkansasio/agent-lumos-aris-console-function/@ai-sdk/anthropic": ["@ai-sdk/anthropic@3.0.64", "", { "dependencies": { "@ai-sdk/provider": "3.0.8", "@ai-sdk/provider-utils": "4.0.21" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-rwLi/Rsuj2pYniQXIrvClHvXDzgM4UQHHnvHTWEF14efnlKclG/1ghpNC+adsRujAbCTr6gRsSbDE2vEqriV7g=="],
 
-    "@mimo-ai/console-function/@ai-sdk/openai": ["@ai-sdk/openai@3.0.48", "", { "dependencies": { "@ai-sdk/provider": "3.0.8", "@ai-sdk/provider-utils": "4.0.21" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-ALmj/53EXpcRqMbGpPJPP4UOSWw0q4VGpnDo7YctvsynjkrKDmoneDG/1a7VQnSPYHnJp6tTRMf5ZdxZ5whulg=="],
+    "@arkansasio/agent-lumos-aris-console-function/@ai-sdk/openai": ["@ai-sdk/openai@3.0.48", "", { "dependencies": { "@ai-sdk/provider": "3.0.8", "@ai-sdk/provider-utils": "4.0.21" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-ALmj/53EXpcRqMbGpPJPP4UOSWw0q4VGpnDo7YctvsynjkrKDmoneDG/1a7VQnSPYHnJp6tTRMf5ZdxZ5whulg=="],
 
-    "@mimo-ai/console-function/@ai-sdk/openai-compatible": ["@ai-sdk/openai-compatible@2.0.37", "", { "dependencies": { "@ai-sdk/provider": "3.0.8", "@ai-sdk/provider-utils": "4.0.21" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-+POSFVcgiu47BK64dhsI6OpcDC0/VAE2ZSaXdXGNNhpC/ava++uSRJYks0k2bpfY0wwCTgpAWZsXn/dG2Yppiw=="],
+    "@arkansasio/agent-lumos-aris-console-function/@ai-sdk/openai-compatible": ["@ai-sdk/openai-compatible@2.0.37", "", { "dependencies": { "@ai-sdk/provider": "3.0.8", "@ai-sdk/provider-utils": "4.0.21" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-+POSFVcgiu47BK64dhsI6OpcDC0/VAE2ZSaXdXGNNhpC/ava++uSRJYks0k2bpfY0wwCTgpAWZsXn/dG2Yppiw=="],
 
-    "@mimo-ai/desktop/@actions/artifact": ["@actions/artifact@4.0.0", "", { "dependencies": { "@actions/core": "^1.10.0", "@actions/github": "^6.0.1", "@actions/http-client": "^2.1.0", "@azure/core-http": "^3.0.5", "@azure/storage-blob": "^12.15.0", "@octokit/core": "^5.2.1", "@octokit/plugin-request-log": "^1.0.4", "@octokit/plugin-retry": "^3.0.9", "@octokit/request": "^8.4.1", "@octokit/request-error": "^5.1.1", "@protobuf-ts/plugin": "^2.2.3-alpha.1", "archiver": "^7.0.1", "jwt-decode": "^3.1.2", "unzip-stream": "^0.3.1" } }, "sha512-HCc2jMJRAfviGFAh0FsOR/jNfWhirxl7W6z8zDtttt0GltwxBLdEIjLiweOPFl9WbyJRW1VWnPUSAixJqcWUMQ=="],
+    "@arkansasio/agent-lumos-aris-desktop/@actions/artifact": ["@actions/artifact@4.0.0", "", { "dependencies": { "@actions/core": "^1.10.0", "@actions/github": "^6.0.1", "@actions/http-client": "^2.1.0", "@azure/core-http": "^3.0.5", "@azure/storage-blob": "^12.15.0", "@octokit/core": "^5.2.1", "@octokit/plugin-request-log": "^1.0.4", "@octokit/plugin-retry": "^3.0.9", "@octokit/request": "^8.4.1", "@octokit/request-error": "^5.1.1", "@protobuf-ts/plugin": "^2.2.3-alpha.1", "archiver": "^7.0.1", "jwt-decode": "^3.1.2", "unzip-stream": "^0.3.1" } }, "sha512-HCc2jMJRAfviGFAh0FsOR/jNfWhirxl7W6z8zDtttt0GltwxBLdEIjLiweOPFl9WbyJRW1VWnPUSAixJqcWUMQ=="],
 
-    "@mimo-ai/desktop/marked": ["marked@15.0.12", "", { "bin": { "marked": "bin/marked.js" } }, "sha512-8dD6FusOQSrpv9Z1rdNMdlSgQOIP880DHqnohobOmYLElGEqAL/JvxvuxZO16r4HtjTlfPRDC1hbvxC9dPN2nA=="],
+    "@arkansasio/agent-lumos-aris-desktop/marked": ["marked@15.0.12", "", { "bin": { "marked": "bin/marked.js" } }, "sha512-8dD6FusOQSrpv9Z1rdNMdlSgQOIP880DHqnohobOmYLElGEqAL/JvxvuxZO16r4HtjTlfPRDC1hbvxC9dPN2nA=="],
 
-    "@mimo-ai/desktop/typescript": ["typescript@5.6.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw=="],
+    "@arkansasio/agent-lumos-aris-desktop/typescript": ["typescript@5.6.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw=="],
 
-    "@mimo-ai/shared/minimatch": ["minimatch@10.2.5", "", { "dependencies": { "brace-expansion": "^5.0.5" } }, "sha512-MULkVLfKGYDFYejP07QOurDLLQpcjk7Fw+7jXS2R2czRQzR56yHRveU5NDJEOviH+hETZKSkIk5c+T23GjFUMg=="],
+    "@arkansasio/agent-lumos-aris-shared/minimatch": ["minimatch@10.2.5", "", { "dependencies": { "brace-expansion": "^5.0.5" } }, "sha512-MULkVLfKGYDFYejP07QOurDLLQpcjk7Fw+7jXS2R2czRQzR56yHRveU5NDJEOviH+hETZKSkIk5c+T23GjFUMg=="],
 
-    "@mimo-ai/shared/semver": ["semver@7.7.4", "", { "bin": { "semver": "bin/semver.js" } }, "sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA=="],
+    "@arkansasio/agent-lumos-aris-shared/semver": ["semver@7.7.4", "", { "bin": { "semver": "bin/semver.js" } }, "sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA=="],
 
-    "@mimo-ai/ui/@solid-primitives/resize-observer": ["@solid-primitives/resize-observer@2.1.3", "", { "dependencies": { "@solid-primitives/event-listener": "^2.4.3", "@solid-primitives/rootless": "^1.5.2", "@solid-primitives/static-store": "^0.1.2", "@solid-primitives/utils": "^6.3.2" }, "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-zBLje5E06TgOg93S7rGPldmhDnouNGhvfZVKOp+oG2XU8snA+GoCSSCz1M+jpNAg5Ek2EakU5UVQqL152WmdXQ=="],
+    "@arkansasio/agent-lumos-aris-ui/@solid-primitives/resize-observer": ["@solid-primitives/resize-observer@2.1.3", "", { "dependencies": { "@solid-primitives/event-listener": "^2.4.3", "@solid-primitives/rootless": "^1.5.2", "@solid-primitives/static-store": "^0.1.2", "@solid-primitives/utils": "^6.3.2" }, "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-zBLje5E06TgOg93S7rGPldmhDnouNGhvfZVKOp+oG2XU8snA+GoCSSCz1M+jpNAg5Ek2EakU5UVQqL152WmdXQ=="],
 
-    "@mimo-ai/web/@shikijs/transformers": ["@shikijs/transformers@3.20.0", "", { "dependencies": { "@shikijs/core": "3.20.0", "@shikijs/types": "3.20.0" } }, "sha512-PrHHMRr3Q5W1qB/42kJW6laqFyWdhrPF2hNR9qjOm1xcSiAO3hAHo7HaVyHE6pMyevmy3i51O8kuGGXC78uK3g=="],
+    "@arkansasio/agent-lumos-aris-web/@shikijs/transformers": ["@shikijs/transformers@3.20.0", "", { "dependencies": { "@shikijs/core": "3.20.0", "@shikijs/types": "3.20.0" } }, "sha512-PrHHMRr3Q5W1qB/42kJW6laqFyWdhrPF2hNR9qjOm1xcSiAO3hAHo7HaVyHE6pMyevmy3i51O8kuGGXC78uK3g=="],
 
     "@modelcontextprotocol/sdk/hono": ["hono@4.12.23", "", {}, "sha512-eIaZ9qDgu7XV0pxOCrg7/WhnQ6Ivm22UcxhXx/A3dcbqbbYgBEkc6e/J/s7j2tS96zoB0S9VBdLwQNCWwUo4LA=="],
 
@@ -6246,17 +6246,17 @@
 
     "@malept/flatpak-bundler/fs-extra/jsonfile": ["jsonfile@6.2.1", "", { "dependencies": { "universalify": "^2.0.0" }, "optionalDependencies": { "graceful-fs": "^4.1.6" } }, "sha512-zwOTdL3rFQ/lRdBnntKVOX6k5cKJwEc1HdilT71BWEu7J41gXIB2MRp+vxduPSwZJPWBxEzv4yH1wYLJGUHX4Q=="],
 
-    "@mimo-ai/console-function/@ai-sdk/anthropic/@ai-sdk/provider-utils": ["@ai-sdk/provider-utils@4.0.21", "", { "dependencies": { "@ai-sdk/provider": "3.0.8", "@standard-schema/spec": "^1.1.0", "eventsource-parser": "^3.0.6" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-MtFUYI1/8mgDvRmaBDjbLJPFFrMG777AvSgyIFQtZHIMzm88R/12vYBBpnk7pfiWLFE1DSZzY4WDYzGbKAcmiw=="],
+    "@arkansasio/agent-lumos-aris-console-function/@ai-sdk/anthropic/@ai-sdk/provider-utils": ["@ai-sdk/provider-utils@4.0.21", "", { "dependencies": { "@ai-sdk/provider": "3.0.8", "@standard-schema/spec": "^1.1.0", "eventsource-parser": "^3.0.6" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-MtFUYI1/8mgDvRmaBDjbLJPFFrMG777AvSgyIFQtZHIMzm88R/12vYBBpnk7pfiWLFE1DSZzY4WDYzGbKAcmiw=="],
 
-    "@mimo-ai/console-function/@ai-sdk/openai/@ai-sdk/provider-utils": ["@ai-sdk/provider-utils@4.0.21", "", { "dependencies": { "@ai-sdk/provider": "3.0.8", "@standard-schema/spec": "^1.1.0", "eventsource-parser": "^3.0.6" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-MtFUYI1/8mgDvRmaBDjbLJPFFrMG777AvSgyIFQtZHIMzm88R/12vYBBpnk7pfiWLFE1DSZzY4WDYzGbKAcmiw=="],
+    "@arkansasio/agent-lumos-aris-console-function/@ai-sdk/openai/@ai-sdk/provider-utils": ["@ai-sdk/provider-utils@4.0.21", "", { "dependencies": { "@ai-sdk/provider": "3.0.8", "@standard-schema/spec": "^1.1.0", "eventsource-parser": "^3.0.6" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-MtFUYI1/8mgDvRmaBDjbLJPFFrMG777AvSgyIFQtZHIMzm88R/12vYBBpnk7pfiWLFE1DSZzY4WDYzGbKAcmiw=="],
 
-    "@mimo-ai/console-function/@ai-sdk/openai-compatible/@ai-sdk/provider-utils": ["@ai-sdk/provider-utils@4.0.21", "", { "dependencies": { "@ai-sdk/provider": "3.0.8", "@standard-schema/spec": "^1.1.0", "eventsource-parser": "^3.0.6" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-MtFUYI1/8mgDvRmaBDjbLJPFFrMG777AvSgyIFQtZHIMzm88R/12vYBBpnk7pfiWLFE1DSZzY4WDYzGbKAcmiw=="],
+    "@arkansasio/agent-lumos-aris-console-function/@ai-sdk/openai-compatible/@ai-sdk/provider-utils": ["@ai-sdk/provider-utils@4.0.21", "", { "dependencies": { "@ai-sdk/provider": "3.0.8", "@standard-schema/spec": "^1.1.0", "eventsource-parser": "^3.0.6" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-MtFUYI1/8mgDvRmaBDjbLJPFFrMG777AvSgyIFQtZHIMzm88R/12vYBBpnk7pfiWLFE1DSZzY4WDYzGbKAcmiw=="],
 
-    "@mimo-ai/desktop/@actions/artifact/@actions/http-client": ["@actions/http-client@2.2.3", "", { "dependencies": { "tunnel": "^0.0.6", "undici": "^5.25.4" } }, "sha512-mx8hyJi/hjFvbPokCg4uRd4ZX78t+YyRPtnKWwIl+RzNaVuFpQHfmlGVfsKEJN8LwTCvL+DfVgAM04XaHkm6bA=="],
+    "@arkansasio/agent-lumos-aris-desktop/@actions/artifact/@actions/http-client": ["@actions/http-client@2.2.3", "", { "dependencies": { "tunnel": "^0.0.6", "undici": "^5.25.4" } }, "sha512-mx8hyJi/hjFvbPokCg4uRd4ZX78t+YyRPtnKWwIl+RzNaVuFpQHfmlGVfsKEJN8LwTCvL+DfVgAM04XaHkm6bA=="],
 
-    "@mimo-ai/web/@shikijs/transformers/@shikijs/core": ["@shikijs/core@3.20.0", "", { "dependencies": { "@shikijs/types": "3.20.0", "@shikijs/vscode-textmate": "^10.0.2", "@types/hast": "^3.0.4", "hast-util-to-html": "^9.0.5" } }, "sha512-f2ED7HYV4JEk827mtMDwe/yQ25pRiXZmtHjWF8uzZKuKiEsJR7Ce1nuQ+HhV9FzDcbIo4ObBCD9GPTzNuy9S1g=="],
+    "@arkansasio/agent-lumos-aris-web/@shikijs/transformers/@shikijs/core": ["@shikijs/core@3.20.0", "", { "dependencies": { "@shikijs/types": "3.20.0", "@shikijs/vscode-textmate": "^10.0.2", "@types/hast": "^3.0.4", "hast-util-to-html": "^9.0.5" } }, "sha512-f2ED7HYV4JEk827mtMDwe/yQ25pRiXZmtHjWF8uzZKuKiEsJR7Ce1nuQ+HhV9FzDcbIo4ObBCD9GPTzNuy9S1g=="],
 
-    "@mimo-ai/web/@shikijs/transformers/@shikijs/types": ["@shikijs/types@3.20.0", "", { "dependencies": { "@shikijs/vscode-textmate": "^10.0.2", "@types/hast": "^3.0.4" } }, "sha512-lhYAATn10nkZcBQ0BlzSbJA3wcmL5MXUUF8d2Zzon6saZDlToKaiRX60n2+ZaHJCmXEcZRWNzn+k9vplr8Jhsw=="],
+    "@arkansasio/agent-lumos-aris-web/@shikijs/transformers/@shikijs/types": ["@shikijs/types@3.20.0", "", { "dependencies": { "@shikijs/vscode-textmate": "^10.0.2", "@types/hast": "^3.0.4" } }, "sha512-lhYAATn10nkZcBQ0BlzSbJA3wcmL5MXUUF8d2Zzon6saZDlToKaiRX60n2+ZaHJCmXEcZRWNzn+k9vplr8Jhsw=="],
 
     "@octokit/auth-app/@octokit/request/@octokit/endpoint": ["@octokit/endpoint@11.0.3", "", { "dependencies": { "@octokit/types": "^16.0.0", "universal-user-agent": "^7.0.2" } }, "sha512-FWFlNxghg4HrXkD3ifYbS/IdL/mDHjh9QcsNyhQjN8dplUoZbejsdpmuqdA76nxj2xoWPs7p8uX2SNr9rYu0Ag=="],
 
@@ -6698,11 +6698,11 @@
 
     "@jsx-email/cli/vite/esbuild/@esbuild/win32-x64": ["@esbuild/win32-x64@0.18.20", "", { "os": "win32", "cpu": "x64" }, "sha512-kTdfRcSiDfQca/y9QIkng02avJ+NCaQvrMejlsB3RRv5sE9rRoeBPISaZpKxHELzRxZyLvNts1P27W3wV+8geQ=="],
 
-    "@mimo-ai/console-function/@ai-sdk/anthropic/@ai-sdk/provider-utils/@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
+    "@arkansasio/agent-lumos-aris-console-function/@ai-sdk/anthropic/@ai-sdk/provider-utils/@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
 
-    "@mimo-ai/console-function/@ai-sdk/openai-compatible/@ai-sdk/provider-utils/@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
+    "@arkansasio/agent-lumos-aris-console-function/@ai-sdk/openai-compatible/@ai-sdk/provider-utils/@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
 
-    "@mimo-ai/console-function/@ai-sdk/openai/@ai-sdk/provider-utils/@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
+    "@arkansasio/agent-lumos-aris-console-function/@ai-sdk/openai/@ai-sdk/provider-utils/@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
 
     "@octokit/auth-app/@octokit/request-error/@octokit/types/@octokit/openapi-types": ["@octokit/openapi-types@27.0.0", "", {}, "sha512-whrdktVs1h6gtR+09+QsNk2+FO+49j6ga1c55YZudfEG+oKJVvJLQi3zkOm5JjiUXAagWK2tI2kTGKJ2Ys7MGA=="],
 
