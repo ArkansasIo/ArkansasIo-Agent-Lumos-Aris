@@ -18,7 +18,7 @@ mkdir -p "$BIN_DIR"
 cat > "$BIN_DIR/lumos-aris" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-exec bun --cwd "$LUMOS_ARIS_HOME/packages/opencode" --conditions=browser src/index.ts "$@"
+exec bun "$LUMOS_ARIS_HOME/packages/api/src/cli.ts" "$@"
 EOF
 chmod +x "$BIN_DIR/lumos-aris"
 printf '[Lumos Aris] Installed to %s\n' "$INSTALL_DIR"
