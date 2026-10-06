@@ -75,13 +75,13 @@ for (const name of modules) {
   }
 }
 '@
-$probePath = Join-Path $env:TEMP "mimocode-module-probe.ts"
+$probePath = Join-Path $root "packages\opencode\.mimocode-module-probe.ts"
 Set-Content -Path $probePath -Value $probe -Encoding utf8
 & $bunPath run --cwd (Join-Path $root "packages\opencode") $probePath
 $probeExit = $LASTEXITCODE
 Remove-Item $probePath -Force -ErrorAction SilentlyContinue
 if ($probeExit -ne 0) {
-  throw "MiMoCode workspace module resolution failed after bun install. Run 'bun install --force' and provide the complete output if this persists."
+  throw "MiMoCode workspace module resolution failed after bun install. The dependency install completed, but the local resolution probe failed. The probe is run from packages\opencode so workspace/package resolution is tested from the correct package context. Review the MISSING lines above for the actual unresolved modules."
 }
 
 $env:MIMOCODE_HOME = Join-Path $root ".dev-home"
