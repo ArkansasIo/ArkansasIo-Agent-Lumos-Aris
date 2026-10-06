@@ -224,3 +224,37 @@ Source code is licensed under the [MIT License](./LICENSE).
 Use of MiMoCode is also subject to the [Use Restrictions](./USE_RESTRICTIONS.md).
 Use of Xiaomi MiMo-hosted services is subject to the [MiMo Terms of Service](https://platform.xiaomimimo.com/docs/terms/user-agreement).
 Use of the MiMo name, logo, and trademarks is subject to the MiMo Trademark Policy.
+
+---
+
+## Free local inference — no paid API tokens
+
+MiMoCode now defaults to **local Ollama inference**. This means you do not need a paid API key, subscription, or cloud inference account to use the coding agent. The model runs on your own computer.
+
+The default model is **Qwen2.5-Coder 7B**. Ollama currently provides Qwen2.5-Coder in 0.5B, 1.5B, 3B, 7B, 14B, and 32B sizes, so smaller computers can use a smaller model. citeturn1search0
+
+### Windows setup
+
+~~~powershell
+.\\scripts\\setup_free_llm.ps1
+# or
+.\\scripts\\setup_free_llm.bat
+
+.\\scripts\\start_free_mimo.ps1
+~~~
+
+Choose a smaller or larger model when needed:
+
+~~~powershell
+.\\scripts\\setup_free_llm.ps1 -Size 3b
+.\\scripts\\setup_free_llm.ps1 -Size 7b
+.\\scripts\\setup_free_llm.ps1 -Size 14b
+~~~
+
+The local OpenAI-compatible endpoint is http://127.0.0.1:11434/v1. Ollama provides a local API for running models directly on the machine. citeturn0search0turn1search0
+
+> **What “no tokens” means:** there is no paid API-token billing and no provider API key is required for inference. LLMs still internally use tokens and have a finite context/output limit; those are properties of the model, not a cloud billing requirement.
+
+### Offline/privacy behavior
+
+The inference request is sent to the local Ollama server on 127.0.0.1. MiMoCode still retains its normal optional web/MCP capabilities, so those should be disabled separately if you want a completely offline installation.
