@@ -231,7 +231,7 @@ Use of the MiMo name, logo, and trademarks is subject to the MiMo Trademark Poli
 
 MiMoCode now defaults to **local Ollama inference**. This means you do not need a paid API key, subscription, or cloud inference account to use the coding agent. The model runs on your own computer.
 
-The default model is **Qwen2.5-Coder 7B**. Ollama currently provides Qwen2.5-Coder in 0.5B, 1.5B, 3B, 7B, 14B, and 32B sizes, so smaller computers can use a smaller model. citeturn1search0
+The default model is **Qwen2.5-Coder 7B**. Ollama currently provides Qwen2.5-Coder in 0.5B, 1.5B, 3B, 7B, 14B, and 32B sizes, so smaller computers can use a smaller model. See https://ollama.com/library/qwen2.5-coder for the available model sizes.
 
 ### Windows setup
 
@@ -251,7 +251,7 @@ Choose a smaller or larger model when needed:
 .\\scripts\\setup_free_llm.ps1 -Size 14b
 ~~~
 
-The local OpenAI-compatible endpoint is http://127.0.0.1:11434/v1. Ollama provides a local API for running models directly on the machine. citeturn0search0turn1search0
+The local OpenAI-compatible endpoint is http://127.0.0.1:11434/v1. Ollama provides a local API for running models directly on the machine. See https://ollama.com/library/qwen2.5-coder for the model and API examples.
 
 > **What “no tokens” means:** there is no paid API-token billing and no provider API key is required for inference. LLMs still internally use tokens and have a finite context/output limit; those are properties of the model, not a cloud billing requirement.
 
