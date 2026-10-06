@@ -49,6 +49,7 @@ import { useCheckServerHealth } from "./utils/server-health"
 const HomeRoute = lazy(() => import("@/pages/home"))
 const ControlCenterRoute = lazy(() => import("@/pages/control-center"))
 const WorkspaceRoute = lazy(() => import("@/pages/workspace"))
+const WhiteboardRoute = lazy(() => import("@/pages/whiteboard"))
 const EngineeringRoute = lazy(() => import("@/pages/engineering"))
 const loadSession = () => import("@/pages/session")
 const Session = lazy(loadSession)
@@ -304,6 +305,7 @@ export function AppInterface(props: {
                   <Route path="/" component={HomeRoute} />
                   <Route path="/control" component={ControlCenterRoute} />
                   <Route path="/engineering" component={EngineeringRoute} />
+                  <Route path="/whiteboard" component={WhiteboardRoute} />
                   <Route path="/:workspace" component={WorkspaceRoute} />
                   <Route path="/:dir" component={DirectoryLayout}>
                     <Route path="/" component={SessionIndexRoute} />
