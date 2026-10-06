@@ -40,7 +40,7 @@ function Find-Ollama {
   return $null
 }
 
-Write-Host "=== Agent Lumos Aris Automatic Windows Setup ===" -ForegroundColor Cyan
+Write-Host "=== Lumos-Aris Automatic Windows Setup ===" -ForegroundColor Cyan
 Write-Host "Repository: $root"
 Write-Host "Model: qwen2.5-coder:$Size"
 Write-Host ""
@@ -96,10 +96,10 @@ if (-not $SkipModelPull) {
 
 Write-Host "Validating workspace module resolution..." -ForegroundColor Cyan
 & $bun --cwd packages/opencode typecheck
-if ($LASTEXITCODE -ne 0) { throw "Agent Lumos Aris typecheck failed." }
+if ($LASTEXITCODE -ne 0) { throw "Lumos-Aris typecheck failed." }
 
 Write-Host ""
-Write-Host "Agent Lumos Aris setup completed successfully." -ForegroundColor Green
+Write-Host "Lumos-Aris setup completed successfully." -ForegroundColor Green
 
 if (-not $SkipStart) {
   & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root "scripts\repair_and_start_lumos-aris.ps1")

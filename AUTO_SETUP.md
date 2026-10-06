@@ -1,4 +1,4 @@
-# MiMoCode Automatic Setup
+# Lumos-Aris Automatic Setup
 
 ## Windows
 
@@ -6,15 +6,15 @@ The recommended automatic installer is:
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\scripts\auto_setup_mimo.ps1
+.\scripts\auto_setup_lumos-aris.ps1
 ```
 
 Optional model size:
 
 ```powershell
-.\scripts\auto_setup_mimo.ps1 -Size 3b
-.\scripts\auto_setup_mimo.ps1 -Size 7b
-.\scripts\auto_setup_mimo.ps1 -Size 14b
+.\scripts\auto_setup_lumos-aris.ps1 -Size 3b
+.\scripts\auto_setup_lumos-aris.ps1 -Size 7b
+.\scripts\auto_setup_lumos-aris.ps1 -Size 14b
 ```
 
 ## What it does
@@ -29,7 +29,7 @@ The installer is designed to be idempotent. It checks each prerequisite before c
 6. Forces a Bun workspace dependency install.
 7. Creates the local configuration directory.
 8. Downloads the selected local model.
-9. Verifies MiMoCode workspace module resolution.
+9. Verifies Lumos-Aris workspace module resolution.
 10. Starts the CLI.
 
 ## Recovery

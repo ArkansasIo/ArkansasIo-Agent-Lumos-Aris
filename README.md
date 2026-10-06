@@ -4,9 +4,9 @@
 <p align="center">Build • Plan • Compose • Remember • Verify • Automate</p>
 
 <p align="center">
-  <a href="https://github.com/ArkansasIo/MiMo-Code">GitHub</a> |
-  <a href="https://github.com/ArkansasIo/MiMo-Code/issues">Issues</a> |
-  <a href="https://github.com/ArkansasIo/MiMo-Code/blob/main/LICENSE">License</a>
+  <a href="https://github.com/ArkansasIo/Lumos-Aris-Code">GitHub</a> |
+  <a href="https://github.com/ArkansasIo/Lumos-Aris-Code/issues">Issues</a> |
+  <a href="https://github.com/ArkansasIo/Lumos-Aris-Code/blob/main/LICENSE">License</a>
 </p>
 
 ---
@@ -46,8 +46,8 @@ Recommended:
 ### Install dependencies
 
 ~~~bash
-git clone https://github.com/ArkansasIo/MiMo-Code.git
-cd MiMo-Code
+git clone https://github.com/ArkansasIo/Lumos-Aris-Code.git
+cd Lumos-Aris-Code
 bun install
 ~~~
 
@@ -423,7 +423,7 @@ Lumos Aris is intended to be a distinct ArkansasIo product identity while retain
 
 **Organization:** ArkansasIo
 
-**Current repository:** ArkansasIo/MiMo-Code
+**Current repository:** ArkansasIo/Lumos-Aris-Code
 
 **License:** MIT
 

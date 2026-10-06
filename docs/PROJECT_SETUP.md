@@ -1,8 +1,8 @@
-# MiMoCode Project Setup Reference
+# Lumos-Aris Project Setup Reference
 
 ## Repository architecture
 
-MiMoCode is a Bun/TypeScript monorepo derived from the OpenCode codebase.
+Lumos-Aris is a Bun/TypeScript monorepo derived from the OpenCode codebase.
 
 Important areas include:
 
@@ -33,8 +33,8 @@ Avoid mixing package managers because doing so can create incompatible lockfiles
 
 Packages such as:
 
-- `@mimo-ai/shared`
-- `@mimo-ai/sdk`
+- `@arkansasio/agent-lumos-aris-shared`
+- `@arkansasio/agent-lumos-aris-sdk`
 - `effect`
 - `@effect/opentelemetry`
 
@@ -74,7 +74,7 @@ The supported local development path uses Ollama with Qwen2.5-Coder.
 
 Configuration is generated under:
 
-`<project>/.mimocode/mimocode.jsonc`
+`<project>/.lumos-aris/lumos-aris.jsonc`
 
 Runtime state can use:
 

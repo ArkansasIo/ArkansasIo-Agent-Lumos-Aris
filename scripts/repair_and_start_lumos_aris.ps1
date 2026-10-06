@@ -54,14 +54,14 @@ try {
 Write-Host "Installing/verifying Bun workspace dependencies..." -ForegroundColor Cyan
 & $bunPath install --force
 if ($LASTEXITCODE -ne 0) {
-  throw "bun install failed with exit code $LASTEXITCODE. Fix the install error before starting MiMoCode."
+  throw "bun install failed with exit code $LASTEXITCODE. Fix the install error before starting Lumos-Aris."
 }
 
-Write-Host "Verifying MiMoCode module resolution..." -ForegroundColor Cyan
+Write-Host "Verifying Lumos-Aris module resolution..." -ForegroundColor Cyan
 $probe = @'
 const modules = [
-  "@mimo-ai/shared/filesystem",
-  "@mimo-ai/sdk/v2",
+  "@arkansasio/agent-lumos-aris-shared/filesystem",
+  "@arkansasio/agent-lumos-aris-sdk/v2",
   "@effect/opentelemetry/Tracer",
   "effect"
 ]
@@ -75,16 +75,16 @@ for (const name of modules) {
   }
 }
 '@
-$probePath = Join-Path $root "packages\opencode\.mimocode-module-probe.ts"
+$probePath = Join-Path $root "packages\opencode\.lumos-aris-module-probe.ts"
 Set-Content -Path $probePath -Value $probe -Encoding utf8
 & $bunPath run --cwd (Join-Path $root "packages\opencode") $probePath
 $probeExit = $LASTEXITCODE
 Remove-Item $probePath -Force -ErrorAction SilentlyContinue
 if ($probeExit -ne 0) {
-  throw "MiMoCode workspace module resolution failed after bun install. The dependency install completed, but the local resolution probe failed. The probe is run from packages\opencode so workspace/package resolution is tested from the correct package context. Review the MISSING lines above for the actual unresolved modules."
+  throw "Lumos-Aris workspace module resolution failed after bun install. The dependency install completed, but the local resolution probe failed. The probe is run from packages\opencode so workspace/package resolution is tested from the correct package context. Review the MISSING lines above for the actual unresolved modules."
 }
 
-$env:MIMOCODE_HOME = Join-Path $root ".dev-home"
-Write-Host "Starting MiMoCode directly on Windows..." -ForegroundColor Green
+$env:LUMOS_ARIS_HOME = Join-Path $root ".dev-home"
+Write-Host "Starting Lumos-Aris directly on Windows..." -ForegroundColor Green
 & $bunPath run --cwd packages/opencode --conditions=browser src/index.ts
 exit $LASTEXITCODE

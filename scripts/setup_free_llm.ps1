@@ -7,11 +7,11 @@ $ErrorActionPreference = "Stop"
 
 $model = "qwen2.5-coder:$Size"
 $root = Split-Path -Parent $PSScriptRoot
-$configPath = Join-Path $root ".mimocode\mimocode.jsonc"
+$configPath = Join-Path $root ".lumos-aris\lumos-aris.jsonc"
 $configDir = Split-Path -Parent $configPath
 New-Item -ItemType Directory -Path $configDir -Force | Out-Null
 
-Write-Host "=== MiMoCode FREE LOCAL LLM SETUP ===" -ForegroundColor Cyan
+Write-Host "=== Lumos-Aris FREE LOCAL LLM SETUP ===" -ForegroundColor Cyan
 Write-Host "Model: $model"
 Write-Host "Inference: local Ollama (no paid API)"
 Write-Host ""
@@ -97,4 +97,4 @@ Write-Host ""
 Write-Host "FREE LOCAL LLM is ready." -ForegroundColor Green
 Write-Host "Config: $configPath"
 Write-Host "Model:  $model"
-Write-Host "Run:    .\scripts\start_free_mimo.ps1"
+Write-Host "Run:    .\scripts\start_free_lumos-aris.ps1"

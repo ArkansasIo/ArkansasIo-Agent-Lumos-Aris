@@ -1,8 +1,8 @@
-# MiMoCode Windows Setup and Troubleshooting
+# Lumos-Aris Windows Setup and Troubleshooting
 
 ## Purpose
 
-This guide provides a repeatable Windows installation, repair, validation, and startup procedure for MiMoCode using Bun and optional local Ollama inference.
+This guide provides a repeatable Windows installation, repair, validation, and startup procedure for Lumos-Aris using Bun and optional local Ollama inference.
 
 ## Requirements
 
@@ -19,7 +19,7 @@ From the repository root:
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\scripts\auto_setup_mimo.ps1
+.\scripts\auto_setup_lumos-aris.ps1
 ```
 
 The script:
@@ -27,17 +27,17 @@ The script:
 2. Locates or installs Ollama when WinGet is available.
 3. Starts/checks the Ollama API.
 4. Installs the Bun workspace with `--force`.
-5. Generates the local MiMoCode configuration.
+5. Generates the local Lumos-Aris configuration.
 6. Pulls the selected Qwen2.5-Coder model.
 7. Runs module-resolution validation.
-8. Starts MiMoCode.
+8. Starts Lumos-Aris.
 
 ## Model selection
 
 ```powershell
-.\scripts\auto_setup_mimo.ps1 -Size 3b
-.\scripts\auto_setup_mimo.ps1 -Size 7b
-.\scripts\auto_setup_mimo.ps1 -Size 14b
+.\scripts\auto_setup_lumos-aris.ps1 -Size 3b
+.\scripts\auto_setup_lumos-aris.ps1 -Size 7b
+.\scripts\auto_setup_lumos-aris.ps1 -Size 14b
 ```
 
 Use a smaller model on systems with limited RAM/VRAM.
@@ -48,7 +48,7 @@ Use a smaller model on systems with limited RAM/VRAM.
 git pull origin main
 bun install --force
 .\scripts\setup_free_llm.ps1 -Size 7b
-.\scripts\repair_and_start_mimo.ps1
+.\scripts\repair_and_start_lumos-aris.ps1
 ```
 
 ## Validation
@@ -133,7 +133,7 @@ bun --cwd packages/opencode test
 For development startup on Windows, prefer:
 
 ```powershell
-.\scripts\repair_and_start_mimo.ps1
+.\scripts\repair_and_start_lumos-aris.ps1
 ```
 
 ## Reporting an error

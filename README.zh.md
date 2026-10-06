@@ -1,24 +1,24 @@
-<h1 align="center">MiMoCode</h1>
+<h1 align="center">Lumos-Aris</h1>
 
 <p align="center">
-  <img src="assets/readme/mimocode-banner.png" alt="MiMoCode" width="700">
+  <img src="assets/readme/lumos-aris-banner.png" alt="Lumos-Aris" width="700">
 </p>
 
-<p align="center"><strong>MiMo Code: Where Models and Agents Co-Evolve</strong></p>
+<p align="center"><strong>Lumos-Aris: Where Models and Agents Co-Evolve</strong></p>
 
 <p align="center">
   中文 | <a href="README.md">English</a>
 </p>
 
 <p align="center">
-  <a href="https://mimo.xiaomi.com/zh/mimocode">官网</a> | <a href="https://mimo.xiaomi.com/zh/blog/mimo-code-long-horizon">博客</a>
+  <a href="https://lumos-aris.xiaomi.com/zh/lumos-aris">官网</a> | <a href="https://lumos-aris.xiaomi.com/zh/blog/lumos-aris-code-long-horizon">博客</a>
 </p>
 
 ---
 
-MiMoCode 是一个终端原生的 AI 编程助手。它能读写代码、执行命令、管理 Git，通过持久化记忆系统，在多次会话间保持对你项目的深度理解，并自我进化。
+Lumos-Aris 是一个终端原生的 AI 编程助手。它能读写代码、执行命令、管理 Git，通过持久化记忆系统，在多次会话间保持对你项目的深度理解，并自我进化。
 
-内置 MiMo Auto 限时免费通道——零配置即可开始使用。也支持接入各家主流 LLM 厂商 API。
+内置 Lumos-Aris Auto 限时免费通道——零配置即可开始使用。也支持接入各家主流 LLM 厂商 API。
 
 ---
 
@@ -26,18 +26,18 @@ MiMoCode 是一个终端原生的 AI 编程助手。它能读写代码、执行�
 
 ```bash
 # 一键安装
-curl -fsSL https://mimo.xiaomi.com/install | bash
+curl -fsSL https://lumos-aris.xiaomi.com/install | bash
 
 # 或通过 npm 安装
-npm install -g @mimo-ai/cli
+npm install -g @arkansasio/agent-lumos-aris-cli
 
 # 运行
-mimo
+lumos-aris
 ```
 
 首次启动自动引导配置。支持：
-- **MiMo Auto（限时免费）** — 匿名通道，零配置
-- **小米 MiMo 平台** — OAuth 登录
+- **Lumos-Aris Auto（限时免费）** — 匿名通道，零配置
+- **小米 Lumos-Aris 平台** — OAuth 登录
 - **从 Claude Code 导入** — 一键迁移已有认证
 - **自定义 Provider** — TUI 内添加任意 OpenAI 兼容 API
 
@@ -99,7 +99,7 @@ Compose 模式提供结构化的 specs-driven 开发流程，内置规划、执�
 
 ### 语音输入
 
-基于 TenVAD 和 MiMo ASR 的实时流式语音输入。通过 `/voice` 激活，按停顿分片转写，文本逐段追加到输入框。仅对 MiMo 登录用户可用。需要安装 `sox`（macOS 上 `brew install sox`，其他平台类似）。
+基于 TenVAD 和 Lumos-Aris ASR 的实时流式语音输入。通过 `/voice` 激活，按停顿分片转写，文本逐段追加到输入框。仅对 Lumos-Aris 登录用户可用。需要安装 `sox`（macOS 上 `brew install sox`，其他平台类似）。
 
 <details>
 <summary><strong>WSLg 音频配置</strong></summary>
@@ -127,9 +127,9 @@ export PULSE_SERVER=tcp:127.0.0.1:4713
 </details>
 
 <details>
-<summary><strong>非 MiMo 渠道语音输入（OpenRouter、内部 API 等）</strong></summary>
+<summary><strong>非 Lumos-Aris 渠道语音输入（OpenRouter、内部 API 等）</strong></summary>
 
-语音输入可通过 `voice` 配置字段路由到其他 OpenAI 兼容 provider。ASR 模型（`mimo-v2.5-asr`）仅在 MiMo 平台可用；语音控制模式（`mimo-v2.5`）可通过 OpenRouter 等中转平台使用。
+语音输入可通过 `voice` 配置字段路由到其他 OpenAI 兼容 provider。ASR 模型（`lumos-aris-v2.5-asr`）仅在 Lumos-Aris 平台可用；语音控制模式（`lumos-aris-v2.5`）可通过 OpenRouter 等中转平台使用。
 
 **OpenRouter（仅语音控制）：**
 
@@ -137,7 +137,7 @@ export PULSE_SERVER=tcp:127.0.0.1:4713
 ```jsonc
 {
   "voice": {
-    "control_model": "openrouter/xiaomi/mimo-v2.5"
+    "control_model": "openrouter/xiaomi/lumos-aris-v2.5"
   }
 }
 ```
@@ -152,21 +152,21 @@ export PULSE_SERVER=tcp:127.0.0.1:4713
         "apiKey": "sk-..."
       },
       "models": {
-        "xiaomi/mimo-v2.5-asr": { "name": "MiMo-V2.5-ASR" },
-        "xiaomi/mimo-v2.5": { "name": "MiMo-V2.5" }
+        "xiaomi/lumos-aris-v2.5-asr": { "name": "Lumos-Aris-V2.5-ASR" },
+        "xiaomi/lumos-aris-v2.5": { "name": "Lumos-Aris-V2.5" }
       }
     }
   },
   "voice": {
-    "asr_model": "internal/xiaomi/mimo-v2.5-asr",
-    "control_model": "internal/xiaomi/mimo-v2.5"
+    "asr_model": "internal/xiaomi/lumos-aris-v2.5-asr",
+    "control_model": "internal/xiaomi/lumos-aris-v2.5"
   }
 }
 ```
 
 自定义 provider 必须在 `models` 中注册至少一个模型才能被系统识别。`voice.*_model` 中的模型名直接传给 API，不必与注册的 key 完全一致。OpenRouter 等内置 provider 无需手动配置 models。
 
-> **注意**：自定义 provider 注册的模型会出现在主模型选择列表中。请勿将 ASR 专用模型（如 `mimo-v2.5-asr`）用作编程主模型。
+> **注意**：自定义 provider 注册的模型会出现在主模型选择列表中。请勿将 ASR 专用模型（如 `lumos-aris-v2.5-asr`）用作编程主模型。
 
 </details>
 
@@ -179,7 +179,7 @@ export PULSE_SERVER=tcp:127.0.0.1:4713
 
 ## 配置
 
-通过项目目录下的 `.mimocode/mimocode.json`（或全局 `~/.config/mimocode/mimocode.json`）配置。主要选项包括：
+通过项目目录下的 `.lumos-aris/lumos-aris.json`（或全局 `~/.config/lumos-aris/lumos-aris.json`）配置。主要选项包括：
 
 - Provider 和模型选择
 - Agent 权限和自定义 Agent
@@ -203,7 +203,7 @@ bun turbo typecheck      # 类型检查
 
 ## 与 OpenCode 的关系
 
-MiMoCode 基于 [OpenCode](https://github.com/XiaomiMiMo/MiMo-Code) fork 构建，保留其全部核心能力（多 Provider、TUI、LSP、MCP、插件），并在此基础上构建了持久化记忆、智能上下文管理、子智能体编排、目标驱动的自主循环、Compose 工作流，以及通过 dream/distill 实现的自我进化。
+Lumos-Aris 基于 [OpenCode](https://github.com/XiaomiLumos-Aris/Lumos-Aris-Code) fork 构建，保留其全部核心能力（多 Provider、TUI、LSP、MCP、插件），并在此基础上构建了持久化记忆、智能上下文管理、子智能体编排、目标驱动的自主循环、Compose 工作流，以及通过 dream/distill 实现的自我进化。
 
 ---
 
@@ -221,6 +221,6 @@ MiMoCode 基于 [OpenCode](https://github.com/XiaomiMiMo/MiMo-Code) fork 构建�
 
 源代码基于 [MIT 许可证](./LICENSE) 开源。
 
-使用 MiMoCode 还需遵守[使用限制](./USE_RESTRICTIONS.md)。
-使用小米 MiMo 托管服务须遵守 [MiMo 服务条款](https://platform.xiaomimimo.com/docs/terms/user-agreement)。
-使用 MiMo 名称、标志和商标须遵守 MiMo 商标政策。
+使用 Lumos-Aris 还需遵守[使用限制](./USE_RESTRICTIONS.md)。
+使用小米 Lumos-Aris 托管服务须遵守 [Lumos-Aris 服务条款](https://platform.xiaomilumos-aris.com/docs/terms/user-agreement)。
+使用 Lumos-Aris 名称、标志和商标须遵守 Lumos-Aris 商标政策。
