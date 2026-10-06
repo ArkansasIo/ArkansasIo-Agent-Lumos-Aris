@@ -1,4 +1,4 @@
-import { createOpencodeClient, createOpencodeServer } from "@mimo-ai/sdk"
+import { createOpencodeClient, createOpencodeServer } from "@arkansasio/agent-lumos-aris-sdk"
 import { pathToFileURL } from "bun"
 
 const server = await createOpencodeServer()

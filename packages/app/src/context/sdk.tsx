@@ -1,5 +1,5 @@
-import type { Event } from "@mimo-ai/sdk/v2/client"
-import { createSimpleContext } from "@mimo-ai/ui/context"
+import type { Event } from "@arkansasio/agent-lumos-aris-sdk/v2/client"
+import { createSimpleContext } from "@arkansasio/agent-lumos-aris-ui/context"
 import { createGlobalEmitter } from "@solid-primitives/event-bus"
 import { type Accessor, createEffect, createMemo, onCleanup } from "solid-js"
 import { useGlobalSDK } from "./global-sdk"
