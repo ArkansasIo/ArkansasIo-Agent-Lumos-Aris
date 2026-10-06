@@ -1,0 +1,11 @@
+{
+  "name": "@arkansasio/agent-lumos-aris-engineering",
+  "version": "0.1.1",
+  "description": "Universal language, library, tool, UML and documentation registry for Lumos Aris",
+  "private": true,
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": { "typecheck": "tsgo --noEmit" },
+  "dependencies": { "typescript": "catalog:" },
+  "devDependencies": { "@tsconfig/bun": "catalog:", "@types/bun": "catalog:" }
+}
