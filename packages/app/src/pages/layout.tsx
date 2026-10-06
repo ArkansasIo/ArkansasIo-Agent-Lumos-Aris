@@ -1113,6 +1113,14 @@ export default function Layout(props: ParentProps) {
         },
       },
       {
+        id: "agent.whiteboard",
+        title: "Open Agent Whiteboard",
+        description: "Open the Lumos Aris Whiteboard for agent architecture, planning, diagrams, and implementation workflows.",
+        category: "Agent",
+        slash: "whiteboard",
+        onSelect: () => navigateWithSidebarReset("/whiteboard"),
+      },
+      {
         id: "workspace.toggle",
         title: language.t("command.workspace.toggle"),
         description: language.t("command.workspace.toggle.description"),
