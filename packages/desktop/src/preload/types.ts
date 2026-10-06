@@ -16,6 +16,7 @@ export type LumosWindowsApi = {
   powershell(script:string): Promise<{stdout:string;stderr:string}>
   command(executable:string,args?:string[]): Promise<{stdout:string;stderr:string}>
   pathExists(path:string): Promise<boolean>
+  apiRequest(path:string,method?:string,body?:unknown): Promise<unknown>
   apiService(): Promise<{url:string;token:string}|null>
   apiHealth(): Promise<{ok:boolean;service?:string;version?:string;error?:string}>
   apiStatus(): Promise<{healthy:boolean;endpoint:string}>
