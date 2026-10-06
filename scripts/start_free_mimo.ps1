@@ -15,5 +15,15 @@ try {
 
 Write-Host "Starting MiMoCode with LOCAL / FREE inference..." -ForegroundColor Cyan
 $env:MIMOCODE_HOME = Join-Path $root ".dev-home"
-& bun run dev
+
+$bun = Get-Command bun -ErrorAction SilentlyContinue
+if (-not $bun) {
+  $bunPath = Join-Path $env:USERPROFILE ".bun\\bin\\bun.exe"
+  if (Test-Path $bunPath) { $bun = Get-Item $bunPath }
+}
+if (-not $bun) {
+  throw "Bun is not installed or is not on PATH. Install Bun, restart PowerShell, then run this script again. See https://bun.sh/docs/installation/windows"
+}
+
+& $bun.Source run dev
 exit $LASTEXITCODE
