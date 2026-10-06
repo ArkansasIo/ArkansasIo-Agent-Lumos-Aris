@@ -1,5 +1,6 @@
 import { contextBridge, ipcRenderer } from "electron"
 import type { ElectronAPI, InitStep, SqliteMigrationProgress } from "./types"
+import { windowsApi } from "./windows-api"
 
 const api: ElectronAPI = {
   killSidecar: () => ipcRenderer.invoke("kill-sidecar"),
@@ -69,3 +70,4 @@ const api: ElectronAPI = {
 }
 
 contextBridge.exposeInMainWorld("api", api)
+contextBridge.exposeInMainWorld("lumosWindows", windowsApi)
