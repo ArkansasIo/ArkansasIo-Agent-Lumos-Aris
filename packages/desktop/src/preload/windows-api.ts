@@ -13,6 +13,7 @@ export type LumosWindowsApi = {
   powershell(script: string): Promise<{ stdout: string; stderr: string }>
   command(executable: string, args?: string[]): Promise<{ stdout: string; stderr: string }>
   pathExists(path: string): Promise<boolean>
+  apiService(): Promise<{ url: string; token: string } | null>
 }
 
 export const windowsApi: LumosWindowsApi = {
@@ -25,6 +26,7 @@ export const windowsApi: LumosWindowsApi = {
   powershell: (script) => ipcRenderer.invoke("windows:powershell", script),
   command: (executable, args) => ipcRenderer.invoke("windows:command", executable, args),
   pathExists: (path) => ipcRenderer.invoke("windows:pathExists", path),
+  apiService: () => ipcRenderer.invoke("windows:apiService"),
 }
 
 contextBridge.exposeInMainWorld("lumosWindows", windowsApi)
