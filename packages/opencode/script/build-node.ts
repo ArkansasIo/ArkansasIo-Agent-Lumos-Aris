@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 
-import { Script } from "@mimo-ai/script"
+import { Script } from "@arkansasio/agent-lumos-aris-script"
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
