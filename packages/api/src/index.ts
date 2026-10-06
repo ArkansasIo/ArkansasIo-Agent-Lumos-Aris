@@ -20,7 +20,7 @@ function json(data: Record<string, unknown>, status = 200) {
   return new Response(JSON.stringify(data, null, 2), { status, headers: { "content-type": "application/json; charset=utf-8" } })
 }
 function authorized(request: Request) {
-  return request.headers.get("authorization") === \`Bearer \${token}\`
+  return request.headers.get("authorization") === `Bearer ${token}`
 }
 async function body(request: Request) { return request.json() as Promise<Record<string, unknown>> }
 async function command(executable: string, args: string[] = []) {
@@ -80,7 +80,7 @@ async function handle(request: Request): Promise<Response> {
 
 const server = Bun.serve({ hostname: host, port, fetch: handle })
 console.log("Lumos Aris API")
-console.log(\`Listening: http://\${host}:\${server.port}\`)
-console.log(\`API token: \${token}\`)
-console.log(\`PowerShell: \${enablePowerShell ? "enabled" : "disabled"}\`)
-console.log(\`Allowed commands: \${[...allowedCommands].join(", ")}\`)
+console.log(`Listening: http://${host}:${server.port}`)
+console.log(`API token: ${token}`)
+console.log(`PowerShell: ${enablePowerShell ? "enabled" : "disabled"}`)
+console.log(`Allowed commands: ${[...allowedCommands].join(", ")}`)
