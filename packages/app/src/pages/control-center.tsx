@@ -1,8 +1,8 @@
 import { For, Show, createResource, createSignal } from "solid-js"
 import { useNavigate } from "@solidjs/router"
-type View="dashboard"|"agent"|"projects"|"whiteboard"|"engineering"|"terminal"|"files"|"uml"|"docs"|"skills"|"settings"
+type View="dashboard"|"api"|"agent"|"projects"|"whiteboard"|"engineering"|"terminal"|"files"|"uml"|"docs"|"skills"|"settings"
 const menu:Array<{id:View;label:string;icon:string}>=[
-{id:"dashboard",label:"Dashboard",icon:"⌂"},{id:"agent",label:"AI Agent",icon:"✦"},{id:"projects",label:"Projects",icon:"▣"},{id:"whiteboard",label:"Whiteboard",icon:"◇"},{id:"engineering",label:"Engineering",icon:"⌘"},{id:"terminal",label:"Terminal",icon:">_"},{id:"files",label:"Files",icon:"▤"},{id:"uml",label:"UML / Architecture",icon:"⌬"},{id:"docs",label:"Documentation",icon:"▧"},{id:"skills",label:"Skills & Tools",icon:"⚙"},{id:"settings",label:"Settings",icon:"☷"}]
+{id:"dashboard",label:"Dashboard",icon:"⌂"},{id:"agent",label:"AI Agent",icon:"✦"},{id:"projects",label:"Projects",icon:"▣"},{id:"whiteboard",label:"Whiteboard",icon:"◇"},{id:"engineering",label:"Engineering",icon:"⌘"},{id:"terminal",label:"Terminal",icon:">_"},{id:"files",label:"Files",icon:"▤"},{id:"uml",label:"UML / Architecture",icon:"⌬"},{id:"docs",label:"Documentation",icon:"▧"},{id:"skills",label:"Skills & Tools",icon:"⚙"},{id:"settings",label:"Settings",icon:"☷"},{id:"api",label:"GUI API",icon:"⌁"}]
 const panels:Record<View,{title:string;subtitle:string;actions:string[]}>={
 dashboard:{title:"Engineering Command Center",subtitle:"Build, test, document and ship software with Lumos Aris.",actions:["New project","Open repository","Create whiteboard","Start agent"]},
 agent:{title:"AI Engineering Agent",subtitle:"Technical Lead, Backend, Frontend and QA agents with shared context.",actions:["New agent task","Run swarm","Review architecture","Generate tests"]},
@@ -14,11 +14,11 @@ files:{title:"Project Files",subtitle:"Repository browser with code intelligence
 uml:{title:"UML & Architecture",subtitle:"Model systems with UML, C4, Mermaid, PlantUML and graphs.",actions:["Class diagram","Sequence diagram","C4 model","Generate architecture"]},
 docs:{title:"Documentation Studio",subtitle:"README, API, ADR, changelog and architecture documentation.",actions:["New document","API reference","Architecture doc","Generate docs"]},
 skills:{title:"Skills & Tools",subtitle:"Agent skills, tool adapters, MCP integrations and approvals.",actions:["Browse skills","Add tool","MCP servers","Permissions"]},
-settings:{title:"Lumos Aris Settings",subtitle:"Desktop, agents, models, security, integrations and appearance.",actions:["Agent settings","Model providers","Security","Appearance"]}}
+settings:{title:"Lumos Aris Settings",subtitle:"Desktop, agents, models, security, integrations and appearance.",actions:["Agent settings","Model providers","Security","Appearance"]},api:{title:"GUI API Console",subtitle:"Connect the Lumos Aris interface to its protected localhost engineering API.",actions:["API health","System status","Command console","PowerShell"]}}
 async function getSystemInfo(){const api=(window as Window & {lumosWindows?:{systemInfo:()=>Promise<any>}}).lumosWindows;return api?api.systemInfo():null}
 export default function ControlCenter(){
 const navigate=useNavigate();const [view,setView]=createSignal<View>("dashboard");const [system]=createResource(getSystemInfo);const panel=()=>panels[view()]
-const select=(id:View)=>{setView(id);if(id==="engineering")navigate("/engineering")}
+const select=(id:View)=>{setView(id);if(id==="engineering")navigate("/engineering");if(id==="whiteboard")navigate("/whiteboard");if(id==="api")navigate("/api-console")}
 return <div class="h-dvh w-full bg-background-base text-text-base flex overflow-hidden">
 <aside class="w-60 shrink-0 border-r border-border-weak-base bg-surface-base flex flex-col"><div class="h-14 px-4 flex items-center gap-3 border-b border-border-weak-base"><div class="size-8 rounded-lg bg-surface-raised-base-active flex items-center justify-center text-text-strong">✦</div><div><div class="text-14-medium text-text-strong">Lumos Aris</div><div class="text-10-regular text-text-weak">AI Engineering OS</div></div></div>
 <nav class="flex-1 overflow-auto p-2"><div class="px-2 py-2 text-10-medium uppercase text-text-weak">Workspace</div><For each={menu}>{item=><button onClick={()=>select(item.id)} class="w-full flex items-center gap-3 px-3 py-2 rounded-md text-12-regular text-text-base hover:bg-surface-raised-base-hover" classList={{"bg-surface-raised-base-active text-text-strong":view()===item.id}}><span class="w-5 text-center">{item.icon}</span><span>{item.label}</span></button>}</For></nav>
