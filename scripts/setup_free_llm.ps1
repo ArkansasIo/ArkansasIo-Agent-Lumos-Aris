@@ -48,7 +48,7 @@ if ($LASTEXITCODE -ne 0) {
   throw "Ollama could not download $model."
 }
 
-$config = @"
+$config = @'
 {
   "$schema": "https://opencode.ai/config.json",
   "enabled_providers": ["ollama"],
@@ -85,7 +85,7 @@ $config = @"
   },
   "mcp": {}
 }
-"@
+'@
 
 Set-Content -Path $configPath -Value $config -Encoding utf8
 
