@@ -97,7 +97,10 @@ export function createWindowsApi(): WindowsApi {
     },
     async apiHealth() {
       try {
-        const response = await fetch("http://127.0.0.1:47991/health")
+        const { getLumosApiService } = await import("./lumos-api-service")
+        const service = getLumosApiService()
+        if (!service) return { ok: false, error: "API service is not running" }
+        const response = await fetch(`${service.url}/health`, { headers: { authorization: `Bearer ${service.token}` } })
         const data = await response.json() as { ok?: boolean; service?: string; version?: string }
         return { ok: response.ok && data.ok === true, service: data.service, version: data.version }
       } catch (error) { return { ok: false, error: error instanceof Error ? error.message : String(error) } }
