@@ -1,0 +1,12 @@
+{
+  "name": "@arkansasio/agent-lumos-aris-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Lumos Aris localhost Windows API service and executable",
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "build:win": "bun build ./src/index.ts --compile --target=bun-windows-x64 --outfile ./dist/lumos-aris-api.exe",
+    "build": "bun run build:win"
+  }
+}
