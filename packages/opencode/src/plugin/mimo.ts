@@ -1,4 +1,4 @@
-import type { Hooks, PluginInput } from "@mimo-ai/plugin"
+import type { Hooks, PluginInput } from "@arkansasio/agent-lumos-aris-plugin"
 import { Log } from "../util"
 import { createServer } from "http"
 import crypto from "crypto"
@@ -7,17 +7,17 @@ import { Global } from "../global"
 import path from "path"
 import fs from "fs"
 
-const log = Log.create({ service: "plugin.mimo" })
+const log = Log.create({ service: "plugin.lumos-aris" })
 
-const PLATFORM_URL = process.env.MIMO_PLATFORM_URL || "https://platform.xiaomimimo.com"
+const PLATFORM_URL = process.env.MIMO_PLATFORM_URL || "https://platform.xiaomilumos-aris.com"
 
 function getKeyName(): string {
-  const filePath = path.join(Global.Path.data, "mimo-key-name")
+  const filePath = path.join(Global.Path.data, "lumos-aris-key-name")
   try {
     const existing = fs.readFileSync(filePath, "utf-8").trim()
     if (existing) return existing
   } catch {}
-  const name = `mimo-code-cli-key-${crypto.randomBytes(4).toString("hex")}`
+  const name = `lumos-aris-code-cli-key-${crypto.randomBytes(4).toString("hex")}`
   fs.writeFileSync(filePath, name)
   return name
 }
@@ -76,7 +76,7 @@ function buildAuthorizeUrl(publicKey: string, redirectUri: string): string {
   const params = new URLSearchParams({
     pk: publicKey,
     redirect_uri: redirectUri,
-    kn: "mimocode",
+    kn: "lumos-aris",
     key_name: getKeyName(),
   })
   return `${PLATFORM_URL}/authorize?${params.toString()}`
@@ -88,8 +88,8 @@ export async function MimoAuthPlugin(_input: PluginInput): Promise<Hooks> {
       input.provider ??= {}
       input.provider.xiaomi ??= {}
       const xiaomi = input.provider.xiaomi
-      xiaomi.name ??= "MiMo"
-      xiaomi.api ??= "https://api.xiaomimimo.com/v1"
+      xiaomi.name ??= "Lumos Aris"
+      xiaomi.api ??= "https://api.xiaomilumos-aris.com/v1"
       // Disable upstream OpenCode hosted providers so they don't silently
       // auto-load their free/public tier (opencode autoloads zero-cost models
       // with apiKey "public" when no key is configured). Previously set by the
@@ -121,7 +121,7 @@ export async function MimoAuthPlugin(_input: PluginInput): Promise<Hooks> {
             })
             const addr = server.address()
             const port = typeof addr === "object" && addr ? addr.port : 0
-            log.info("mimo oauth server started", { port })
+            log.info("lumos-aris oauth server started", { port })
 
             const redirectUri = `http://localhost:${port}/`
             const authUrl = buildAuthorizeUrl(publicKey, redirectUri)
@@ -137,12 +137,12 @@ export async function MimoAuthPlugin(_input: PluginInput): Promise<Hooks> {
 
               server.on("request", (req, res) => {
                 const url = new URL(req.url || "/", `http://localhost`)
-                log.info("mimo oauth callback received", { path: url.pathname, query: url.search.substring(0, 100) })
+                log.info("lumos-aris oauth callback received", { path: url.pathname, query: url.search.substring(0, 100) })
 
                 const u = url.searchParams.get("u")
 
                 if (!u) {
-                  log.warn("mimo oauth callback missing u param")
+                  log.warn("lumos-aris oauth callback missing u param")
                   res.writeHead(302, { Location: `${PLATFORM_URL}/authorize/callback?status=error&message=missing_data` })
                   res.end()
                   reject(new Error("Missing encrypted data"))
@@ -151,13 +151,13 @@ export async function MimoAuthPlugin(_input: PluginInput): Promise<Hooks> {
 
                 try {
                   const result = decrypt(privateKeyDer, u)
-                  log.info("mimo oauth decrypt success", { uid: result.uid, url: result.url })
+                  log.info("lumos-aris oauth decrypt success", { uid: result.uid, url: result.url })
                   res.writeHead(302, { Location: `${PLATFORM_URL}/authorize/callback?status=success` })
                   res.end()
                   clearTimeout(timeout)
                   resolve(result)
                 } catch (err) {
-                  log.error("mimo oauth decrypt failed", { error: err })
+                  log.error("lumos-aris oauth decrypt failed", { error: err })
                   res.writeHead(302, { Location: `${PLATFORM_URL}/authorize/callback?status=error&message=decrypt_failed` })
                   res.end()
                   reject(new Error("Decryption failed"))
@@ -200,7 +200,7 @@ export async function MimoAuthPlugin(_input: PluginInput): Promise<Hooks> {
     },
     "chat.headers": async (input, output) => {
       if (input.model.providerID !== "xiaomi") return
-      output.headers["X-Mimo-Source"] = "mimocode-cli"
+      output.headers["X-Mimo-Source"] = "lumos-aris-cli"
     },
   }
 }
