@@ -17,4 +17,8 @@ export type LumosWindowsApi = {
   command(executable:string,args?:string[]): Promise<{stdout:string;stderr:string}>
   pathExists(path:string): Promise<boolean>
   apiService(): Promise<{url:string;token:string}|null>
+  apiHealth(): Promise<{ok:boolean;service?:string;version?:string;error?:string}>
+  apiStatus(): Promise<{healthy:boolean;endpoint:string}>
+  startApi(): Promise<{ok:boolean;error?:string}>
+  stopApi(): Promise<{ok:boolean}>
 }
