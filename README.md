@@ -1,24 +1,24 @@
-<h1 align="center">MiMoCode</h1>
+<h1 align="center">ArkansasIo Agent Lumos Aris</h1>
 
 <p align="center">
-  <img src="assets/readme/mimocode-banner.png" alt="MiMoCode" width="700">
+  <img src="assets/readme/lumos-aris-banner.png" alt="ArkansasIo Agent Lumos Aris" width="700">
 </p>
 
-<p align="center"><strong>MiMo Code: Where Models and Agents Co-Evolve</strong></p>
+<p align="center"><strong>ArkansasIo Agent Lumos Aris: Where Models and Agents Co-Evolve</strong></p>
 
 <p align="center">
   <a href="README.zh.md">中文</a> | English
 </p>
 
 <p align="center">
-  <a href="https://mimo.xiaomi.com/coder">Website</a> | <a href="https://mimo.xiaomi.com/en/blog/mimo-code-long-horizon">Blog</a>
+  <a href="https://lumos-aris.xiaomi.com/coder">Website</a> | <a href="https://lumos-aris.xiaomi.com/en/blog/lumos-aris-code-long-horizon">Blog</a>
 </p>
 
 ---
 
-MiMoCode is a terminal-native AI coding assistant. It can read and write code, run commands, manage Git, and use a persistent memory system to keep a deep understanding of your project across sessions while continuously improving itself.
+ArkansasIo Agent Lumos Aris is a terminal-native AI coding assistant. It can read and write code, run commands, manage Git, coordinate subagents, and maintain persistent project memory so development context survives across sessions.
 
-MiMo Auto is built in as a free-for-limited-time channel, so you can start with zero configuration. MiMoCode also supports connecting to any mainstream LLM provider API.
+Lumos Aris Auto is built in as a free-for-limited-time channel, so you can start with zero configuration. ArkansasIo Agent Lumos Aris also supports connecting to any mainstream LLM provider API.
 
 ---
 
@@ -26,18 +26,18 @@ MiMo Auto is built in as a free-for-limited-time channel, so you can start with 
 
 ```bash
 # One-line install
-curl -fsSL https://mimo.xiaomi.com/install | bash
+curl -fsSL https://lumos-aris.xiaomi.com/install | bash
 
 # Or install via npm
-npm install -g @mimo-ai/cli
+npm install -g @lumos-aris-ai/cli
 
 # Run
-mimo
+lumos-aris
 ```
 
 The first launch guides you through configuration automatically. Supported options:
-- **MiMo Auto (free for a limited time)** — anonymous channel, zero configuration
-- **Xiaomi MiMo Platform** — OAuth login
+- **Lumos Aris Auto (free for a limited time)** — anonymous channel, zero configuration
+- **Lumos Aris Platform** — OAuth login
 - **Import from Claude Code** — migrate existing authentication in one step
 - **Custom Provider** — add any OpenAI-compatible API in the TUI
 
@@ -99,7 +99,7 @@ Compose mode provides a structured workflow for specs-driven development. It inc
 
 ### Voice Input
 
-Real-time streaming voice input powered by TenVAD and MiMo ASR. Activate with `/voice`, then speak — audio is segmented by pauses and transcribed incrementally into the input. Available for MiMo logged-in users. Requires `sox` (`brew install sox` on macOS, other platforms similar).
+Real-time streaming voice input powered by TenVAD and Lumos Aris ASR. Activate with `/voice`, then speak — audio is segmented by pauses and transcribed incrementally into the input. Available for Lumos Aris platform users. Requires `sox` (`brew install sox` on macOS, other platforms similar).
 
 <details>
 <summary><strong>WSLg audio setup</strong></summary>
@@ -127,9 +127,9 @@ export PULSE_SERVER=tcp:127.0.0.1:4713
 </details>
 
 <details>
-<summary><strong>Non-MiMo voice providers (OpenRouter, internal API, etc.)</strong></summary>
+<summary><strong>Non-Lumos Aris voice providers (OpenRouter, internal API, etc.)</strong></summary>
 
-Voice input can route through other OpenAI-compatible providers via the `voice` config field. The ASR model (`mimo-v2.5-asr`) is only available on MiMo's platform; voice control mode (`mimo-v2.5`) is available on OpenRouter and compatible relay platforms.
+Voice input can route through other OpenAI-compatible providers via the `voice` config field. The ASR model (`lumos-aris-v2.5-asr`) is only available on the original provider platform; voice control mode (`lumos-aris-v2.5`) is available on OpenRouter and compatible relay platforms.
 
 **OpenRouter (voice control only):**
 
@@ -137,7 +137,7 @@ Use `/connect` to sign in to OpenRouter, then add to your config:
 ```jsonc
 {
   "voice": {
-    "control_model": "openrouter/xiaomi/mimo-v2.5"
+    "control_model": "openrouter/xiaomi/lumos-aris-v2.5"
   }
 }
 ```
@@ -152,21 +152,21 @@ Use `/connect` to sign in to OpenRouter, then add to your config:
         "apiKey": "sk-..."
       },
       "models": {
-        "xiaomi/mimo-v2.5-asr": { "name": "MiMo-V2.5-ASR" },
-        "xiaomi/mimo-v2.5": { "name": "MiMo-V2.5" }
+        "xiaomi/lumos-aris-v2.5-asr": { "name": "Lumos Aris-V2.5-ASR" },
+        "xiaomi/lumos-aris-v2.5": { "name": "Lumos Aris-V2.5" }
       }
     }
   },
   "voice": {
-    "asr_model": "internal/xiaomi/mimo-v2.5-asr",
-    "control_model": "internal/xiaomi/mimo-v2.5"
+    "asr_model": "internal/xiaomi/lumos-aris-v2.5-asr",
+    "control_model": "internal/xiaomi/lumos-aris-v2.5"
   }
 }
 ```
 
 Custom providers must register at least one model in their `models` field to be recognized. The model names in `voice.*_model` are sent directly to the API — they don't need to match the registered model keys exactly.
 
-> **Note:** Models registered under a custom provider will appear in the model selection list. Don't use ASR-only models (e.g. `mimo-v2.5-asr`) as your primary coding model.
+> **Note:** Models registered under a custom provider will appear in the model selection list. Don't use ASR-only models (e.g. `lumos-aris-v2.5-asr`) as your primary coding model.
 
 </details>
 
@@ -179,7 +179,7 @@ Custom providers must register at least one model in their `models` field to be 
 
 ## Configuration
 
-MiMoCode is configured via `.mimocode/mimocode.json` in the project directory (or `~/.config/mimocode/mimocode.json` globally). Key options include:
+ArkansasIo Agent Lumos Aris is configured via ` .lumos-aris/lumos-aris.json` in the project directory (or `~/.config/lumos-aris/lumos-aris.json` globally). Key options include:
 
 - Provider and model selection
 - Agent permissions and custom agents
@@ -203,7 +203,7 @@ bun turbo typecheck      # Type check
 
 ## Relationship to OpenCode
 
-MiMoCode is built as a fork of [OpenCode](https://github.com/XiaomiMiMo/MiMo-Code). It keeps all core OpenCode capabilities (multiple providers, TUI, LSP, MCP, plugins) and adds persistent memory, intelligent context management, subagent orchestration, goal-driven autonomous loops, compose workflows, and self-improvement via dream/distill.
+ArkansasIo Agent Lumos Aris is built as a fork of [OpenCode](https://github.com/ArkansasIoLumos Aris/Lumos Aris-Code). It keeps all core OpenCode capabilities (multiple providers, TUI, LSP, MCP, plugins) and adds persistent memory, intelligent context management, subagent orchestration, goal-driven autonomous loops, compose workflows, and self-improvement via dream/distill.
 
 ---
 
@@ -221,34 +221,34 @@ Scan the QR code to join the community group chat:
 
 Source code is licensed under the [MIT License](./LICENSE).
 
-Use of MiMoCode is also subject to the [Use Restrictions](./USE_RESTRICTIONS.md).
-Use of Xiaomi MiMo-hosted services is subject to the [MiMo Terms of Service](https://platform.xiaomimimo.com/docs/terms/user-agreement).
-Use of the MiMo name, logo, and trademarks is subject to the MiMo Trademark Policy.
+Use of ArkansasIo Agent Lumos Aris is also subject to the [Use Restrictions](./USE_RESTRICTIONS.md).
+Use of ArkansasIo Lumos Aris-hosted services is subject to the [Lumos Aris Terms of Service](https://platform.xiaomilumos-aris.com/docs/terms/user-agreement).
+Use of the ArkansasIo Agent Lumos Aris name, logo, and trademarks is subject to the Lumos Aris Trademark Policy.
 
 ---
 
 ## Free local inference — no paid API tokens
 
-MiMoCode now defaults to **local Ollama inference**. This means you do not need a paid API key, subscription, or cloud inference account to use the coding agent. The model runs on your own computer.
+ArkansasIo Agent Lumos Aris now defaults to **local Ollama inference**. This means you do not need a paid API key, subscription, or cloud inference account to use the coding agent. The model runs on your own computer.
 
 The default model is **Qwen2.5-Coder 7B**. Ollama currently provides Qwen2.5-Coder in 0.5B, 1.5B, 3B, 7B, 14B, and 32B sizes, so smaller computers can use a smaller model. See https://ollama.com/library/qwen2.5-coder for the available model sizes.
 
 ### Windows setup
 
 ~~~powershell
-.\\scripts\\setup_free_llm.ps1
+.\\scripts\\setup_free_lumos_aris_llm.ps1
 # or
 .\\scripts\\setup_free_llm.bat
 
-.\\scripts\\start_free_mimo.ps1
+.\\scripts\\start_free_lumos-aris.ps1
 ~~~
 
 Choose a smaller or larger model when needed:
 
 ~~~powershell
-.\\scripts\\setup_free_llm.ps1 -Size 3b
-.\\scripts\\setup_free_llm.ps1 -Size 7b
-.\\scripts\\setup_free_llm.ps1 -Size 14b
+.\\scripts\\setup_free_lumos_aris_llm.ps1 -Size 3b
+.\\scripts\\setup_free_lumos_aris_llm.ps1 -Size 7b
+.\\scripts\\setup_free_lumos_aris_llm.ps1 -Size 14b
 ~~~
 
 The local OpenAI-compatible endpoint is http://127.0.0.1:11434/v1. Ollama provides a local API for running models directly on the machine. See https://ollama.com/library/qwen2.5-coder for the model and API examples.
@@ -257,7 +257,7 @@ The local OpenAI-compatible endpoint is http://127.0.0.1:11434/v1. Ollama provid
 
 ### Offline/privacy behavior
 
-The inference request is sent to the local Ollama server on 127.0.0.1. MiMoCode still retains its normal optional web/MCP capabilities, so those should be disabled separately if you want a completely offline installation.
+The inference request is sent to the local Ollama server on 127.0.0.1. ArkansasIo Agent Lumos Aris still retains its normal optional web/MCP capabilities, so those should be disabled separately if you want a completely offline installation.
 
 
 ## Windows automatic setup
@@ -266,24 +266,24 @@ For Windows users, the repository includes a complete setup and repair path. Fro
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\\scripts\\auto_setup_mimo.ps1
+.\\scripts\\auto_setup_lumos-aris.ps1
 ```
 
 Or from Command Prompt:
 
 ```bat
-scripts\\auto_setup_mimo.bat
+scripts\\auto_setup_lumos-aris.bat
 ```
 
 Choose a local Qwen2.5-Coder model size when needed:
 
 ```powershell
-.\\scripts\\auto_setup_mimo.ps1 -Size 3b
-.\\scripts\\auto_setup_mimo.ps1 -Size 7b
-.\\scripts\\auto_setup_mimo.ps1 -Size 14b
+.\\scripts\\auto_setup_lumos-aris.ps1 -Size 3b
+.\\scripts\\auto_setup_lumos-aris.ps1 -Size 7b
+.\\scripts\\auto_setup_lumos-aris.ps1 -Size 14b
 ```
 
-The automatic setup verifies Bun, Ollama, workspace dependencies, the local model configuration, and the MiMoCode TypeScript build before starting the application. Use `-SkipModelPull` to skip downloading a model and `-SkipStart` to perform setup/validation without launching MiMoCode.
+The automatic setup verifies Bun, Ollama, workspace dependencies, the local model configuration, and the ArkansasIo Agent Lumos Aris TypeScript build before starting the application. Use `-SkipModelPull` to skip downloading a model and `-SkipStart` to perform setup/validation without launching ArkansasIo Agent Lumos Aris.
 
 ### Windows documentation
 
