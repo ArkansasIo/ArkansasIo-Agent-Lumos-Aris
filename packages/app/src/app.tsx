@@ -55,6 +55,8 @@ const ApiConsoleRoute = lazy(() => import("@/pages/api-console"))
 const ProjectsManagerRoute = lazy(() => import("@/pages/projects-manager"))
 const AuditCenterRoute = lazy(() => import("@/pages/audit-center"))
 const SecurityCenterRoute = lazy(() => import("@/pages/security-center"))
+const JobsManagerRoute = lazy(() => import("@/pages/jobs-manager"))
+const DiagnosticsRoute = lazy(() => import("@/pages/diagnostics"))
 const loadSession = () => import("@/pages/session")
 const Session = lazy(loadSession)
 const Loading = () => <div class="size-full" />
@@ -314,6 +316,8 @@ export function AppInterface(props: {
                   <Route path="/projects" component={ProjectsManagerRoute} />
                   <Route path="/audit" component={AuditCenterRoute} />
                   <Route path="/security" component={SecurityCenterRoute} />
+                  <Route path="/jobs" component={JobsManagerRoute} />
+                  <Route path="/diagnostics" component={DiagnosticsRoute} />
                   <Route path="/:workspace" component={WorkspaceRoute} />
                   <Route path="/:dir" component={DirectoryLayout}>
                     <Route path="/" component={SessionIndexRoute} />
