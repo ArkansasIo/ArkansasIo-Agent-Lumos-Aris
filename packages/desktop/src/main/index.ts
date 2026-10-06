@@ -37,6 +37,7 @@ const { autoUpdater } = pkg
 import type { InitStep, ServerReadyData, SqliteMigrationProgress, WslConfig } from "../preload/types"
 import { checkAppExists, resolveAppPath, wslPath } from "./apps"
 import { registerWindowsApiIpc } from "./windows-api-ipc"
+import { startLumosApiService, stopLumosApiService } from "./lumos-api-service"
 import { CHANNEL, UPDATER_ENABLED } from "./constants"
 import { registerIpcHandlers, sendDeepLinks, sendMenuCommand, sendSqliteMigrationProgress } from "./ipc"
 import { initLogging } from "./logging"
@@ -98,6 +99,7 @@ function setupApp() {
 
   app.on("before-quit", () => {
     killSidecar()
+    stopLumosApiService()
   })
 
   app.on("will-quit", () => {
@@ -115,6 +117,7 @@ function setupApp() {
     app.setAsDefaultProtocolClient("opencode")
     registerRendererProtocol()
     registerWindowsApiIpc()
+    startLumosApiService()
     setDockIcon()
     setupAutoUpdater()
     await initialize()
