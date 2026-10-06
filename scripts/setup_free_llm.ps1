@@ -52,8 +52,8 @@ $config = @'
 {
   "$schema": "https://opencode.ai/config.json",
   "enabled_providers": ["ollama"],
-  "model": "ollama/$model",
-  "small_model": "ollama/$model",
+  "model": "ollama/__MODEL__",
+  "small_model": "ollama/__MODEL__",
   "provider": {
     "ollama": {
       "name": "Ollama (Local / Free)",
@@ -65,8 +65,8 @@ $config = @'
         "chunkTimeout": 480000
       },
       "models": {
-        "$model": {
-          "name": "Qwen2.5 Coder $Size (Local)",
+        "__MODEL__": {
+          "name": "Qwen2.5 Coder __SIZE__ (Local)",
           "cost": { "input": 0, "output": 0, "cache_read": 0, "cache_write": 0 },
           "limit": { "context": 32768, "output": 8192 },
           "modalities": { "input": ["text"], "output": ["text"] },
@@ -86,6 +86,8 @@ $config = @'
   "mcp": {}
 }
 '@
+
+$config = $config.Replace("__MODEL__", $model).Replace("__SIZE__", $Size)
 
 Set-Content -Path $configPath -Value $config -Encoding utf8
 
