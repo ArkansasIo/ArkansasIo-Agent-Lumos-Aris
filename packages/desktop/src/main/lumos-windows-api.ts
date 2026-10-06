@@ -30,6 +30,8 @@ export type WindowsApi = {
   powershell(script: string): Promise<{ stdout: string; stderr: string }>
   command(executable: string, args?: string[]): Promise<{ stdout: string; stderr: string }>
   pathExists(path: string): Promise<boolean>
+  revealPath(path: string): Promise<void>
+  setPowerShellPolicy(policy: "restricted" | "remote-signed" | "bypass"): Promise<{ stdout: string; stderr: string }>
 }
 
 function assertSafeExternalUrl(url: string) {
@@ -84,6 +86,14 @@ export function createWindowsApi(): WindowsApi {
     },
     async pathExists(path) {
       return existsSync(join(path))
+    },
+    async revealPath(path) {
+      if (!existsSync(path)) throw new Error("Path does not exist: " + path)
+      shell.showItemInFolder(path)
+    },
+    async setPowerShellPolicy(policy) {
+      if (process.platform !== "win32") throw new Error("PowerShell policy API is only available on Windows")
+      return execFileAsync("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy " + policy + " -Force"], { windowsHide: true })
     },
   }
 }
