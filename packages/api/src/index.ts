@@ -142,8 +142,10 @@ async function handle(request: Request): Promise<Response> {
   return json({ error: "Not found" }, 404)
 }
 
-const server = Bun.serve({ hostname: host, port, fetch: handle })
-console.log("Lumos Aris API")
-console.log(`Listening: http://${host}:${server.port}`)
-console.log(`PowerShell: ${enablePowerShell ? "enabled" : "disabled"}`)
-console.log(`Allowed commands: ${[...allowedCommands].join(", ")}`)
+export const server = Bun.serve({ hostname: host, port, fetch: handle })
+if (import.meta.main) {
+  console.log("Lumos Aris API")
+  console.log(`Listening: http://${host}:${server.port}`)
+  console.log(`PowerShell: ${enablePowerShell ? "enabled" : "disabled"}`)
+  console.log(`Allowed commands: ${[...allowedCommands].join(", ")}`)
+}
