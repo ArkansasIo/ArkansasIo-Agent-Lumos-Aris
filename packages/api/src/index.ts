@@ -26,7 +26,7 @@ const allowedCommands = new Set(
 
 function json(data: Record<string, unknown>, status = 200, request?: Request) {
   const origin = request?.headers.get("origin")
-  const allowedOrigin = origin && /^(https?:\\/\\/localhost(?::\\d+)?|https?:\\/\\/127\\.0\\.0\\.1(?::\\d+)?)$/.test(origin) ? origin : "null"
+  const allowedOrigin = origin && /^(https?:\/\/localhost(?::\d+)?|https?:\/\/127\.0\.0\.1(?::\d+)?)$/.test(origin) ? origin : "null"
   return new Response(JSON.stringify(data, null, 2), {
     status,
     headers: {
