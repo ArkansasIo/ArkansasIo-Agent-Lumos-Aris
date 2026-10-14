@@ -17,3 +17,46 @@ import type { BunShell } from "./shell.js"
 import { type ToolDefinition } from "./tool.js"
 
 export * from "./tool.js"
+
+/**
+ * Public plugin contract used by installed Lumos Aris plugins.
+ * This interface deliberately avoids importing private terminal internals.
+ */
+export type PluginInput = {
+  client: ReturnType<typeof createOpencodeClient>
+  project?: Project
+  directory: string
+  worktree: string
+  serverUrl?: URL
+  $: BunShell
+  experimental_workspace: {
+    register(
+      id: string,
+      workspace: {
+        name: string
+        description?: string
+        configure?(config: Record<string, unknown>): Record<string, unknown> | Promise<Record<string, unknown>>
+        create?(config: Record<string, unknown>): void | Promise<void>
+        remove?(config: Record<string, unknown>): void | Promise<void>
+        target?(config: Record<string, unknown>): unknown
+      },
+    ): void
+  }
+}
+
+export type Plugin = (input: PluginInput) => Promise<{
+  tool?: Record<string, ToolDefinition>
+  event?: (input: { event: Event }) => void | Promise<void>
+  [key: string]: unknown
+}>
+
+/** Compatibility aliases retained for plugin authors. */
+export type PluginContext = PluginInput
+export type PluginConfig = SDKConfig
+export type PluginProvider = Provider | ProviderV2
+export type PluginModel = Model | ModelV2
+export type PluginPermission = Permission
+export type PluginUserMessage = UserMessage
+export type PluginMessage = Message
+export type PluginPart = Part
+export type PluginAuth = Auth
