@@ -6,7 +6,7 @@ import { join } from "node:path";
 const home = process.env.LUMOS_ARIS_HOME || join(process.env.LOCALAPPDATA || process.env.HOME || process.cwd(), "LumosAris");
 const root = home;
 const opencode = join(root, "packages", "opencode");
-const apiExe = join(root, "packages", "api", "dist", "lumos-aris-api.exe");
+const apiExe = join(root, "packages", "api", "dist", process.platform === "win32" ? "lumos-aris-api.exe" : "lumos-aris-api");
 
 function run(command, args = []) {
   try { execFileSync(command, args, { cwd: root, stdio: "inherit", shell: process.platform === "win32" }); return true }
