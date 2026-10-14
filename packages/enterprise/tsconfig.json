@@ -29,7 +29,6 @@
       "@mimo-ai/ui/*": [
         "../ui/src/components/*"
       ]
-    },
-    "baseUrl": "."
+    }
   }
 }
