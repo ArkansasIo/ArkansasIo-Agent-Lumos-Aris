@@ -20,7 +20,12 @@
     "test": "echo 'do not run tests from root' && exit 1",
     "dev:api": "bun run --cwd packages/api dev",
     "build:api:win": "bun run --cwd packages/api build:win",
-    "build:api:win:ps": "powershell -ExecutionPolicy Bypass -File ./scripts/build_lumos_aris_api_exe.ps1"
+    "build:api:win:ps": "powershell -ExecutionPolicy Bypass -File ./scripts/build_lumos_aris_api_exe.ps1",
+    "lumos": "node ./scripts/lumos-aris-cli.mjs",
+    "api:start": "powershell -ExecutionPolicy Bypass -File ./scripts/lumos_aris_api_windows.ps1 start",
+    "api:stop": "powershell -ExecutionPolicy Bypass -File ./scripts/lumos_aris_api_windows.ps1 stop",
+    "api:status": "powershell -ExecutionPolicy Bypass -File ./scripts/lumos_aris_api_windows.ps1 status",
+    "api:doctor": "powershell -ExecutionPolicy Bypass -File ./scripts/lumos_aris_api_windows.ps1 doctor"
   },
   "workspaces": {
     "packages": [
@@ -108,7 +113,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ArkansasIo/Agent-Lumos-Aris"
+    "url": "https://github.com/ArkansasIo/ArkansasIo-Agent-Lumos-Aris"
   },
   "license": "MIT",
   "prettier": {
