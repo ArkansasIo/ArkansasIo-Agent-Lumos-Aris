@@ -35,10 +35,10 @@ export type PluginInput = {
       workspace: {
         name: string
         description?: string
-        configure?(config: Record<string, unknown>): Record<string, unknown> | Promise<Record<string, unknown>>
-        create?(config: Record<string, unknown>): void | Promise<void>
-        remove?(config: Record<string, unknown>): void | Promise<void>
-        target?(config: Record<string, unknown>): unknown
+        configure?(config: { directory?: string; [key: string]: unknown }): { directory?: string; [key: string]: unknown } | Promise<{ directory?: string; [key: string]: unknown }>
+        create?(config: { directory?: string; [key: string]: unknown }): void | Promise<void>
+        remove?(config: { directory?: string; [key: string]: unknown }): void | Promise<void>
+        target?(config: { directory?: string; [key: string]: unknown }): unknown
       },
     ): void
   }
