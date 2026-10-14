@@ -11,10 +11,25 @@
     "allowJs": true,
     "noEmit": true,
     "strict": true,
-    "types": ["@cloudflare/workers-types", "vite/client"],
+    "types": [
+      "@cloudflare/workers-types",
+      "vite/client"
+    ],
     "isolatedModules": true,
     "paths": {
-      "~/*": ["./src/*"]
-    }
+      "~/*": [
+        "./src/*"
+      ],
+      "@mimo-ai/shared/*": [
+        "../shared/src/*"
+      ],
+      "@mimo-ai/sdk/*": [
+        "../sdk/js/src/*"
+      ],
+      "@mimo-ai/ui/*": [
+        "../ui/src/components/*"
+      ]
+    },
+    "baseUrl": "."
   }
 }
